@@ -50,7 +50,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
         <div 
           id="motivation"
           ref={motivationRef}
-          className={`w-[78%] mx-auto mb-32 mt-24 transition-transform duration-300 ${
+          className={`xl:w-[78%] lg:w-[90%] mx-auto mb-32 mt-24 transition-transform duration-300 ${
             visibleSections["motivation"] ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
           }`}
         >
@@ -60,20 +60,20 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
         </div>
 
         {/* Main Section Wrapper */}
-        <div className="w-[96%] mx-auto bg-gradient-to-b from-black/0 via-black/30 to-black rounded-3xl py-16 mb-44 scroll-smooth">
+        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-b md:from-black/0 md:via-black/30 md:to-black md:rounded-3xl py-16 mb-44 scroll-smooth">
     
           {/* About Me Section */}
-          <div className="w-[89%] mx-auto py-16" ref={aboutMeRef}>
+          <div className="xl:w-[89%] lg:w-[96%] w-full mx-auto py-16" ref={aboutMeRef}>
             <AboutMe />
           </div>
 
           {/* Stack Section */}
-          <div className="w-[90%] min-h-screen mx-auto py-16 my-16 flex items-center justify-center" ref={cardStackRef}>
+          <div className="xl:w-[90%] lg:w-[96%] md:w-[98%] min-h-screen mx-auto py-16 my-16 flex items-center justify-center" ref={cardStackRef}>
             <StackSection />
           </div>
 
           {/* Skill Section */}
-          <div className="w-[89%] mx-auto py-16" ref={skillRef}>
+          <div className="xl:w-[89%] lg:w-[96%] w-full mx-auto py-16" ref={skillRef}>
             <Skill />
           </div>
 
@@ -100,7 +100,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
         <div className="w-full h-1"></div>
 
         {/* Email Me Section */}
-        <div className="w-[96%] mx-auto bg-gradient-to-t from-black/0 via-black/90 to-black pb-64 pt-5 mt-44 rounded-t-3xl" ref={queriesRef}>
+        <div className="xl:w-[96%] mx-auto bg-gradient-to-t from-black/0 via-black/90 to-black pb-64 pt-5 mt-44 rounded-t-3xl" ref={queriesRef}>
           <Queries />
         </div>
 

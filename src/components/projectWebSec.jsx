@@ -48,7 +48,7 @@ function ProjectWebSection() {
             rel="noopener noreferrer" // Keamanan untuk link eksternal
             id={`web-${project.id}`} // ID unik untuk tiap proyek
             ref={webRefs.current[project.id - 1]} // Menambahkan referensi untuk animasi
-            className={`shadow-md hover:shadow-black overflow-hidden block cursor-pointer transition-all duration-300 rounded-3xl ${
+            className={`group shadow-md hover:shadow-black overflow-hidden block cursor-pointer transition-all duration-300 rounded-3xl ${
               visibleSections[`web-${project.id}`]
                 ? "translate-y-0 opacity-100 duration-300 ease-in-out" // Animasi jika bagian proyek terlihat
                 : "translate-y-10 opacity-0 duration-300 ease-in" // Animasi jika bagian proyek tidak terlihat

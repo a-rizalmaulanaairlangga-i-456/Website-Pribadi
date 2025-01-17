@@ -83,40 +83,72 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
     };
   }, [homeRef, aboutMeRef, cardStackRef, skillRef, queriesRef, contactRef]);
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State untuk mengontrol dropdown
+
   return (
     <nav
-      className={`fixed w-full transition-all duration-1000 z-50 text-white px-6 py-3 ${ // Navbar styling
-        isScrolled ? 'backdrop-blur-md shadow-md' : 'bg-neutral-900 rounded-b-3xl w-5/12'
+      className={`fixed w-full transition-all duration-1000 z-50 text-white px-6 py-3 ${
+        isScrolled ? 'backdrop-blur-md shadow-md' : 'h-16 md:h-auto bg-neutral-900 rounded-b-3xl w-5/12'
       }`}
-      style={{ left: '50%', transform: 'translateX(-50%)' }} // Center the navbar horizontally
+      style={{ left: '50%', transform: 'translateX(-50%)' }}
     >
-      <div className="flex items-center justify-between max-w-[80%] mx-auto">
-        
+      <div className="relative flex items-center justify-between max-w-[96%] mx-auto">
         {/* Logo Section */}
         <div
-          className={`text-sm transition-all duration-500 ease-in-out ${ // Logo transition effects
-            isScrolled ? 'absolute left-6 top-3' : 'relative'
+          className={`text-sm transition-all duration-500 ease-in-out ${
+            isScrolled ? 'relative left-0' : 'relative left-6'
           } logo w-fit`}
         >
           <img
-            src="logo.png" // Logo image
+            src="logo.png"
             alt="Logo"
-            onClick={() => handleNavigation(homeRef)} // Navigate to home when clicked
-            className="cursor-pointer hover:scale-125 hover:drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)] transition-all duration-500 ease-in-out w-auto h-8"
+            onClick={() => handleNavigation(homeRef)}
+            className="relative cursor-pointer hover:scale-125 hover:drop-shadow-[0_4px_4px_rgba(255,255,255,0.8)] transition-all duration-500 ease-in-out w-auto h-8"
           />
         </div>
 
-        {/* Navigation Menu Section */}
+        {/* Mobile Menu Button */}
+        <div 
+          className={`block md:hidden transition-all duration-500 ease-in-out ${
+            isScrolled ? 'relative right-0' : 'relative right-6'
+          }`}
+        >
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 rounded-md hover:bg-neutral-800 transition-all"
+            aria-label="Toggle Menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d={isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Navigation Menu Section (Hidden on small screens) */}
         <div
-          className={`flex items-center text-base transition-all duration-500 ease-in-out ${ // Navigation menu transition effects
-            isScrolled ? 'justify-center' : 'justify-end'
+          className={`hidden md:flex items-center text-base transition-all duration-500 ease-in-out ${
+            isScrolled ? 'translate-x-0 justify-center' : 'translate-x-6 justify-end'
           } flex-1`}
         >
-          <div className={`${isScrolled ? 'flex bg-neutral-900 rounded-full w-fit px-7 py-2 -mb-3 gap-3' : ''}`}>
-            {/* Navigation Buttons */}
+          <div
+            className={`flex transition-all duration-500 mx-14 ${
+              isScrolled ? 'bg-neutral-900 rounded-full w-fit px-7 py-2 -mb-3 gap-3' : 'py-1'
+            }`}
+          >
             <button
               onClick={() => handleNavigation(aboutMeRef)}
-              className={`hover:bg-zinc-200 hover:text-black px-3 py-1 rounded-2xl transition duration-500 ease-in-out ${
+              className={`hover:bg-zinc-200 hover:text-black px-3 py-1 mr-1 rounded-2xl transition duration-500 ease-in-out ${
                 activeMenu === 'About Me' ? 'bg-zinc-400 text-black' : 'hover:bg-zinc-200'
               }`}
             >
@@ -124,7 +156,7 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
             </button>
             <button
               onClick={() => handleNavigation(cardStackRef)}
-              className={`hover:bg-zinc-200 hover:text-black px-3 py-1 rounded-2xl transition duration-500 ease-in-out ${
+              className={`hover:bg-zinc-200 hover:text-black px-3 py-1 mr-1 rounded-2xl transition duration-500 ease-in-out ${
                 activeMenu === 'Stack' ? 'bg-zinc-400 text-black' : 'hover:bg-zinc-200'
               }`}
             >
@@ -132,7 +164,7 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
             </button>
             <button
               onClick={() => handleNavigation(skillRef)}
-              className={`hover:bg-zinc-200 hover:text-black px-3 py-1 rounded-2xl transition duration-500 ease-in-out ${
+              className={`hover:bg-zinc-200 hover:text-black px-3 py-1 mr-1 rounded-2xl transition duration-500 ease-in-out ${
                 activeMenu === 'Skill' ? 'bg-zinc-400 text-black' : 'hover:bg-zinc-200'
               }`}
             >
@@ -151,13 +183,13 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
 
         {/* Contact Menu Section */}
         <div
-          className={`text-sm transition-all duration-500 ease-in-out ${ // Contact menu transition effects
-            isScrolled ? 'absolute right-6 top-3' : 'relative'
+          className={`hidden md:block text-sm transition-all duration-500 ease-in-out ${
+            isScrolled ? 'absolute right-0 top-3' : 'relative right-6'
           }`}
         >
           <button
             onClick={() => handleNavigation(contactRef)}
-            className={`relative group px-3 py-1 rounded-lg transition-all duration-500 ease-in-out ${
+            className={`group px-3 py-1 rounded-lg transition-all duration-500 ease-in-out ${
               activeMenu === 'Contact' ? 'shadow-lg' : ''
             }`}
           >
@@ -170,6 +202,42 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
           </button>
         </div>
       </div>
+
+      {/* Dropdown Menu for Mobile */}
+      {isMenuOpen && (
+        <div className="md:hidden mt-4 bg-neutral-900 rounded-lg shadow-lg text-white">
+          <button
+            onClick={() => handleNavigation(aboutMeRef)}
+            className="block px-4 py-2 hover:bg-zinc-800 w-full text-left"
+          >
+            Tentang
+          </button>
+          <button
+            onClick={() => handleNavigation(cardStackRef)}
+            className="block px-4 py-2 hover:bg-zinc-800 w-full text-left"
+          >
+            Alat
+          </button>
+          <button
+            onClick={() => handleNavigation(skillRef)}
+            className="block px-4 py-2 hover:bg-zinc-800 w-full text-left"
+          >
+            Keahlian
+          </button>
+          <button
+            onClick={() => handleNavigation(queriesRef)}
+            className="block px-4 py-2 hover:bg-zinc-800 w-full text-left"
+          >
+            Pertanyaan
+          </button>
+          <button
+            onClick={() => handleNavigation(contactRef)}
+            className="block px-4 py-2 hover:bg-zinc-800 w-full text-left"
+          >
+            Kontak
+          </button>
+        </div>
+      )}
     </nav>
   );
 };

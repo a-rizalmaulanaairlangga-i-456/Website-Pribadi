@@ -6,7 +6,7 @@ import { Questions } from './queries.jsx';
 // Komponen TypingEffect untuk menampilkan teks dengan efek mengetik
 const TypingEffect = () => {
   // Array teks yang akan ditampilkan
-  const texts = ["Selamat Datang di Website Pribadi Saya", "Saya Rizal", "Saya Seorang Mahasiswa IT"];
+  const texts = ["Selamat Datang di Website Saya", "Saya Rizal", "Saya Seorang Mahasiswa IT"];
   
   // State untuk teks yang sedang ditampilkan
   const [displayedText, setDisplayedText] = useState(""); 
@@ -95,16 +95,16 @@ const Home = ({ scrollToSection, homeRef, skillRef, aboutMeRef, queriesRef }) =>
       }`}
     >
       {/* Bagian DisplayText - Menampilkan efek ketik */}
-      <div className="w-full text-center text-3xl font-bold mb-8 p-5">
+      <div className="w-full text-3xl font-bold mb-8 p-5">
         <TypingEffect />
       </div>
 
       {/* Bagian Kiri, Tengah, Kanan */}
-      <div className="flex h-screen w-full mt-10 transition-all duration-500">
+      <div className="flex flex-col md:flex-row h-screen w-full mt-10 transition-all duration-500">
         
-        {/* Div Kiri */}
+        {/* Div Kiri - Tersembunyi di layar kecil */}
         <div
-          className="flex flex-col justify-center items-start p-4 transition-all duration-500"
+          className="hidden md:flex flex-col justify-center items-start p-4 transition-all duration-500"
           style={{ flexBasis: getFlexBasis('left'), maxWidth: '60%' }}
           onMouseEnter={() => setHovered('left')}
           onMouseLeave={() => setHovered(null)}
@@ -140,20 +140,20 @@ const Home = ({ scrollToSection, homeRef, skillRef, aboutMeRef, queriesRef }) =>
           )}
         </div>
 
-        {/* Div Tengah */}
+        {/* Div Tengah - Tetap aktif di semua layar */}
         <div
           className={`flex justify-center items-center transition-all duration-500 ${
             hovered ? 'scale-90' : 'scale-100'
           }`}
-          style={{ flexBasis: getFlexBasis('center'), maxWidth: '40%' }}
+          style={{ flexBasis: getFlexBasis('center'), maxWidth: '100%' }}
           onMouseEnter={() => setHovered(null)} // Reset saat kursor di div tengah
         >
-          <img src="foto-diri.jpg" alt="Descriptive Alt Text" className="w-full h-auto rounded-full" />
+          <img src="foto-diri.jpg" alt="Descriptive Alt Text" className="w-3/5 md:w-full h-auto rounded-full" />
         </div>
 
-        {/* Div Kanan */}
+        {/* Div Kanan - Tersembunyi di layar kecil */}
         <div
-          className="relative flex flex-col justify-center items-center p-4 transition-all duration-500"
+          className="hidden md:flex relative flex-col justify-center items-center p-4 transition-all duration-500"
           style={{ flexBasis: getFlexBasis('right'), maxWidth: '60%' }}
           onMouseEnter={() => setHovered('right')}
           onMouseLeave={() => setHovered(null)}

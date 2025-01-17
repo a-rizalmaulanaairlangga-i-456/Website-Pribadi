@@ -36,7 +36,7 @@ const TypingEffect = () => {
   }, [currentIndex]); // Efek dijalankan ulang setiap kali indeks teks berubah
 
   return (
-    <div id="app" className="flex items-center">
+    <div id="app" className="flex">
       <div className="text-[3rem] font-bold font-mono">
         <span>Haloo, {displayedText}</span>
         <span className="inline-block w-[1px] bg-black animate-blink">|</span>
