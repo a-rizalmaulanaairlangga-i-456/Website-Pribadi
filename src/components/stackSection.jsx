@@ -99,7 +99,7 @@ const StackSection = () => {
       <h3
         id='title2'
         ref={title2Ref}
-        className={`text-xl font-medium text-center transition-transform duration-300 ease-in-out ${
+        className={`text-xl font-medium text-center md:w-full w-2/3 mx-auto transition-transform duration-300 ease-in-out ${
           visibleSections["title2"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
         }`}
       >
@@ -110,7 +110,7 @@ const StackSection = () => {
       <h6
         id='instruction'
         ref={instructionRef}
-        className={`text-sm text-zinc-400 font-medium text-center mb-12 italic transition-transform duration-300 ease-in-out ${
+        className={`text-sm text-zinc-400 font-medium text-center mt-2 mb-12 italic transition-transform duration-300 ease-in-out ${
           visibleSections["instruction"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
         }`}
       >

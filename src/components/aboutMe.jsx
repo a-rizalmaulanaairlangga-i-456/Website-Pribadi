@@ -32,7 +32,7 @@ const AboutMe = () => {
 
       {/* Header Tentang Saya */}
       <div
-        className="flex justify-center items-center xl:w-[22%] lg:w-[25%] md:w-[29%] sm:w-[40%] w-[50%] xl:h-14 lg:h-12 md:h-11 sm:h-12 h-24 lg:py-1 text-center font-bold text-3xl text-white rounded-3xl relative mx-auto mt-3"
+        className="flex justify-center items-center xl:w-[22%] lg:w-[25%] md:w-[29%] sm:w-[40%] w-[42%] xl:h-14 lg:h-12 md:h-11 sm:h-12 h-20 lg:py-1 text-center font-bold text-3xl text-white rounded-3xl relative mx-auto mt-3"
         style={{ backgroundImage: "url('/tekstur abu.jpeg')" }} // Latar belakang tekstur
       >
         Tentang Saya
@@ -72,7 +72,7 @@ const AboutMe = () => {
             href="https://www.canva.com/design/DAGcDuXrLuA/OCfppTRVaHwFLhjgeNec-w/edit?utm_content=DAGcDuXrLuA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
             target="_blank"
             rel="noopener noreferrer"
-            class="lg:hidden sm:w-[20%] w-[50%] h-12 mb-8 bg-white/0 backdrop-blur-sm text-white font-semibold rounded-3xl hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
+            class="lg:hidden sm:w-[20%] w-[50%] h-12 mb-8 bg-black/30 backdrop-blur-sm text-white font-semibold rounded-3xl hover:bg-black/45 border-2 border-white transition-all duration-500 flex items-center justify-center"
           >
             CV dokumen
           </a>
@@ -81,7 +81,7 @@ const AboutMe = () => {
         {/* Bagian Pencapaian */}
         <div class="col-span-1 lg:col-span-3 flex lg:grid gap-5">
           {/* Pencapaian Akademik */}
-          <div class="rounded-3xl relative overflow-hidden group">
+          <div class="rounded-3xl relative overflow-hidden group w-full">
             <div
               class="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/NLC.png')" }}
@@ -92,12 +92,12 @@ const AboutMe = () => {
               >
                 Akademik
               </h3>
-              <h5 class="text-sm text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 pt-5">
+              <h5 class="text-sm text-white lg:mt-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pt-5">
                 Beberapa sertifikat akademik yang saya raih semasa SMA
               </h5>
               <HashLink 
                 to="/about-me#academicAchiev"
-                class="flex justify-center items-center text-center w-1/2 h-10 bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold rounded-3xl opacity-0 hover group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
+                class="flex justify-center items-center text-center sm:w-1/2 w-full sm:h-10 lg:mt-0 mt-7 py-1 bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold rounded-3xl opacity-0 hover group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
               >
                 Lebih banyak
               </HashLink>
@@ -112,7 +112,7 @@ const AboutMe = () => {
           </div>
 
           {/* Pencapaian Non-Akademik */}
-          <div class="rounded-3xl relative overflow-hidden group">
+          <div class="rounded-3xl relative overflow-hidden group w-full">
             <div
               class="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/inc2.jpg')" }}
@@ -123,12 +123,12 @@ const AboutMe = () => {
               >
                 Non-Akademik
               </h3>
-              <h5 class="text-sm text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 pt-5">
+              <h5 class="text-sm text-white lg:mt-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pt-5">
                 Beberapa sertifikat non-akademik yang saya raih semasa SMA
               </h5>
               <HashLink 
                 to="/about-me#nonAcademicAchiev"
-                class="flex justify-center items-center text-center w-1/2 h-10 bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold rounded-3xl opacity-0 hover group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
+                class="flex justify-center items-center text-center sm:w-1/2 w-full sm:h-10 lg:mt-0 mt-7 py-1 bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold rounded-3xl opacity-0 hover group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
               >
                 Lebih banyak
               </HashLink>

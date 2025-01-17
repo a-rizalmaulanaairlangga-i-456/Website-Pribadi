@@ -68,7 +68,7 @@ const Contact = ({ contactRef }) => {
   
   return (
     <div 
-      className="w-[96%] mx-auto bg-gradient-to-b from-black/0 via-black/90 to-black pb-16 mt-52 pt-64"
+      className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full mx-auto bg-gradient-to-b from-black/0 via-black/90 to-black pb-16 mt-52 pt-64"
       ref={contactRef}
     >
       <div 

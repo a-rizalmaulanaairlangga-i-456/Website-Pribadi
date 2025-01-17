@@ -76,7 +76,7 @@ const FAQ = () => {
             {/* Tombol untuk toggle pertanyaan */}
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full text-left text-2xl font-normal flex justify-between items-center focus:outline-none"
+              className="w-full text-left sm:text-2xl text-xl sm:font-normal font-light flex justify-between items-center focus:outline-none"
             >
               {faq.question} {/* Menampilkan teks pertanyaan */}
               <span className="text-gray-400">
@@ -91,7 +91,7 @@ const FAQ = () => {
                   : "max-h-0 duration-700 ease-in"
               }`}
             >
-              <p className="mt-3 text-gray-400 text-lg">{faq.answer}</p>
+              <p className="mt-3 text-gray-400 sm:text-lg text-base">{faq.answer}</p>
             </div>
           </div>
         ))}
