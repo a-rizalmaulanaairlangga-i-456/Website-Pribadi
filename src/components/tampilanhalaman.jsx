@@ -100,7 +100,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
         <div className="w-full h-1"></div>
 
         {/* Email Me Section */}
-        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-b md:from-black/0 md:via-black/30 md:to-black pb-64 pt-5 mt-44 rounded-t-3xl" ref={queriesRef}>
+        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-t md:from-black/0 md:via-black/90 md:to-black pb-64 pt-5 mt-44 rounded-t-3xl" ref={queriesRef}>
           <Queries />
         </div>
 
