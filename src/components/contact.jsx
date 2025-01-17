@@ -7,13 +7,15 @@ const Contact = ({ contactRef }) => {
   const { visibleSections, observeSections } = useContext(AnimationContext);
 
   // Referensi untuk bagian judul dan deskripsi
-  const titleRef = useRef(null);
-  const descRefs = useRef(null);
+  const hubungiRef = useRef(null);
+  const kunjungiRef = useRef(null);
+  const descHubRefs = useRef(null);
+  const descKunjRefs = useRef(null);
 
   // Menggunakan hook useEffect untuk mengamati perubahan pada elemen yang dirujuk
   useEffect(() => {
     // observeSections mengatur elemen yang diamati dan threshold untuk animasi
-    observeSections([titleRef, descRefs], [0.2]); // Threshold diubah menjadi 0.2
+    observeSections([hubungiRef, kunjungiRef, descHubRefs, descKunjRefs], [0.2]); // Threshold diubah menjadi 0.2
   }, [observeSections]);
   
   // State untuk melacak item yang sedang di-hover
@@ -34,11 +36,7 @@ const Contact = ({ contactRef }) => {
   // Fungsi untuk merender elemen kontak atau media sosial
   const renderItems = (items) => (
     <div 
-      id="desc" // ID untuk deskripsi
-      ref={descRefs} // Menghubungkan referensi ke elemen ini
-      className={`flex justify-center items-center gap-10 transition-transform duration-300 ${
-        visibleSections["desc"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-      }`}
+      className={`flex justify-center items-center gap-10 transition-transform duration-300`}
     >
       {/* Memetakan setiap item dan menampilkannya */}
       {items.map((item, index) => (
@@ -68,28 +66,58 @@ const Contact = ({ contactRef }) => {
   
   return (
     <div 
-      className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full mx-auto bg-gradient-to-b from-black/0 via-black/90 to-black pb-16 mt-52 pt-64"
+      className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full mx-auto scroll-smooth bg-gradient-to-b from-black/0 via-black/90 to-black pb-16 mt-52 pt-64"
       ref={contactRef}
     >
       <div 
-        id="title" // ID untuk judul
-        ref={titleRef} // Menghubungkan referensi ke elemen ini
-        className={`w-full text-white py-6 mt-4 mb-24 flex items-center justify-center gap-96 transition-transform duration-300 ${
-          visibleSections["title"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-        }`}
+        className={`w-full text-white py-6 mt-4 mb-24 md:flex grid items-center justify-center xl:gap-80 lg:gap-48 md:gap-28 gap-0`}
       >
         <div className='grid'>
-          {/* Bagian judul dengan teks "Mari Terhubung" */}
-          <div className="text-white text-3xl text-center font-medium mb-10">Mari Terhubung</div>
+          {/* Bagian judul dengan teks "Hubungi Saya" */}
+          <div 
+            id="hubungi" // ID untuk judul
+            ref={hubungiRef} // Menghubungkan referensi ke elemen ini
+            className={`text-white text-3xl text-center font-medium lg:mb-10 md:mb-3  transition-transform duration-300 ${
+              visibleSections["hubungi"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          >
+            Hubungi Saya
+          </div>
           {/* Render item kontak */}
-          {renderItems(contactMethods)}
+          <div
+            id="descHub" // ID untuk judul
+            ref={descHubRefs} // Menghubungkan referensi ke elemen ini
+            className={`w-full text-white py-6 mt-4 mb-24 md:flex grid items-center justify-center xl:gap-80 lg:gap-48 md:gap-16 sm:gap-36 transition-transform duration-300 ${
+              visibleSections["descHub"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          >
+            {renderItems(contactMethods)}          
+          </div>
+
         </div>
         
         <div className='grid'>
           {/* Bagian judul dengan teks "Kunjungi Saya" */}
-          <div className="text-white text-3xl text-center font-medium mb-10">Kunjungi Saya</div>
+          <div 
+            id="kunjungi" // ID untuk judul
+            ref={kunjungiRef} // Menghubungkan referensi ke elemen ini
+            className={`text-white text-3xl text-center font-medium lg:mb-10 md:mb-3  transition-transform duration-300 ${
+              visibleSections["kunjungi"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          >
+            Kunjungi Saya
+          </div>
           {/* Render item media sosial */}
-          {renderItems(socialMedia)}
+          <div
+            id="descKunj" // ID untuk judul
+            ref={descKunjRefs} // Menghubungkan referensi ke elemen ini
+            className={`w-full text-white py-6 mt-4 mb-24 md:flex grid items-center justify-center xl:gap-80 lg:gap-48 md:gap-16 sm:gap-36 transition-transform duration-300 ${
+              visibleSections["descKunj"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          >
+            {renderItems(socialMedia)}
+          </div>
+
         </div>
       </div>
       

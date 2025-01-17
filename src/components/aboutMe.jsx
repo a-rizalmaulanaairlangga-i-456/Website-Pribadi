@@ -13,7 +13,7 @@ const AboutMe = () => {
 
   // Mengaktifkan pengamatan elemen saat komponen dimuat
   useEffect(() => {
-    observeSections([aboutRef], [0.2]); // Mengamati elemen dengan threshold 20%
+    observeSections([aboutRef], [0.1]); // Mengamati elemen dengan threshold 20%
   }, [observeSections]);
 
   return (

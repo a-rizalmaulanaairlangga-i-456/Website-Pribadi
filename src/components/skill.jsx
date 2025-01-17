@@ -14,7 +14,7 @@ const Skill = () => {
 
   // Menjalankan animasi untuk memunculkan bagian skill saat bagian tersebut terlihat
   useEffect(() => {
-    observeSections([skillRef], [0.2]); // Menentukan threshold untuk animasi
+    observeSections([skillRef], [0.1]); // Menentukan threshold untuk animasi
   }, [observeSections]);
   
   return (

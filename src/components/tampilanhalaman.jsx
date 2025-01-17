@@ -22,11 +22,11 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
 
   // useEffect to observe visibility of sections and trigger animations
   useEffect(() => {
-    observeSections([motivationRef], [0.5]); // Threshold set to 0.5 for motivation section
+    observeSections([motivationRef], [0.1]); // Threshold set to 0.1 for motivation section
   }, [observeSections]);
 
   useEffect(() => {
-    observeSections([buttonMoreAllRefs], [0.2]); // Threshold set to 0.2 for the "More All" button
+    observeSections([buttonMoreAllRefs], [0.1]); // Threshold set to 0.1 for the "More All" button
   }, [observeSections]);
 
   return (
@@ -50,7 +50,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
         <div 
           id="motivation"
           ref={motivationRef}
-          className={`xl:w-[78%] lg:w-[90%] w-[93%] mx-auto mb-32 mt-24 transition-transform duration-300 ${
+          className={`xl:w-[78%] lg:w-[90%] w-[93%] mx-auto mb-32 mt-1 transition-transform duration-300 ${
             visibleSections["motivation"] ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
           }`}
         >
@@ -60,7 +60,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
         </div>
 
         {/* Main Section Wrapper */}
-        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-b md:from-black/0 md:via-black/30 md:to-black md:rounded-3xl py-16 mb-44 scroll-smooth">
+        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-b md:from-black/0 md:via-black/30 md:to-black md:rounded-3xl py-16 mb-20 scroll-smooth">
     
           {/* About Me Section */}
           <div className="xl:w-[89%] lg:w-[96%] w-full mx-auto py-16" ref={aboutMeRef}>
@@ -68,7 +68,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
           </div>
 
           {/* Stack Section */}
-          <div className="xl:w-[90%] lg:w-[96%] w-full min-h-screen mx-auto py-16 my-16 flex items-center justify-center" ref={cardStackRef}>
+          <div className="xl:w-[90%] lg:w-[96%] w-full min-h-screen mx-auto py-16 my-9 flex items-center justify-center" ref={cardStackRef}>
             <StackSection />
           </div>
 
@@ -100,7 +100,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
         <div className="w-full h-1"></div>
 
         {/* Email Me Section */}
-        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-t md:from-black/0 md:via-black/90 md:to-black pb-64 pt-5 mt-44 rounded-t-3xl" ref={queriesRef}>
+        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-t md:from-black/0 md:via-black/90 md:to-black pb-64 pt-5 mt-20 rounded-t-3xl" ref={queriesRef}>
           <Queries />
         </div>
 
