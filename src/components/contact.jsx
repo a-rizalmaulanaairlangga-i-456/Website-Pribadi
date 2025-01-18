@@ -66,7 +66,7 @@ const Contact = ({ contactRef }) => {
   
   return (
     <div 
-      className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full mx-auto scroll-smooth bg-gradient-to-b from-black/0 via-black/90 to-black pb-16 mt-52 pt-64"
+      className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full mx-auto scroll-smooth bg-gradient-to-b from-black/0 via-black/90 to-black pb-16 md:mt-36 sm:mt-10 md:pt-64 pt-60"
       ref={contactRef}
     >
       <div 

@@ -90,22 +90,29 @@ const Skill = () => {
             ></div>
             <div class="grid relative bg-black/20 h-full backdrop-blur-sm px-5 py-3 items-center justify-center z-40">
               <h3
-                class="text-lg text-center text-neutral-700 lg:bg-white/35 rounded-full font-semibold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:text-white group-hover:bg-transparent group-hover:top-0 group-hover:left-0 group-hover:transform-none group-hover:translate-x-0 group-hover:translate-y-0 group-hover:px-5 group-hover:py-3 transition-all duration-500"
+                class="text-lg lg:text-center lg:text-neutral-700 font-semibold lg:absolute 
+                lg:top-1/2 lg:left-1/2 transform lg:-translate-x-1/2 lg:-translate-y-1/2 
+                lg:group-hover:text-white lg:group-hover:top-0 lg:group-hover:left-0 
+                lg:group-hover:transform-none lg:group-hover:translate-x-0 lg:group-hover:translate-y-0 
+                lg:group-hover:px-5 lg:group-hover:py-3 transition-all duration-500 lg:bg-white/35 rounded-full group-hover:bg-transparent"
               >
                 Program Website
               </h3>
-              <h5 class="text-sm text-white lg:mt-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pt-5">
+              <h5 class="text-sm text-white lg:mt-0 mt-2 
+                lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 lg:pt-5">
                 Beberapa projek website saya mulai dari HTML dasar hingga React.js
               </h5>
               <HashLink 
                 to="/my-skill#projectWebSec"
-                class="flex justify-center items-center text-center sm:w-1/2 w-full sm:h-10 lg:mt-0 mt-7 py-1 bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold rounded-3xl opacity-0 hover group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
+                class="flex justify-center items-center text-center xl:w-2/3 lg:w-3/4 w-full sm:h-10 lg:mt-0 mt-7 py-1 
+                bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold 
+                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
               >
                 Lebih banyak
               </HashLink>
             </div>
             <div
-              class="absolute bottom-0 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              class="absolute bottom-0 w-full lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500"
               style={{
                 background: "linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4))",
                 height: '100%',
@@ -121,16 +128,23 @@ const Skill = () => {
             ></div>
             <div class="grid relative bg-black/20 h-full backdrop-blur-sm px-5 py-3 items-center justify-center z-40">
               <h3
-                class="text-lg text-center text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:top-0 group-hover:left-0 group-hover:transform-none group-hover:translate-x-0 group-hover:translate-y-0 group-hover:px-5 group-hover:py-3 mb-0 group-hover:mb-5 transition-all duration-500"
+                class="text-lg lg:text-center lg:text-white font-semibold lg:absolute 
+                top-1/2 left-1/2 transform lg:-translate-x-1/2 lg:-translate-y-1/2 
+                lg:group-hover:text-white lg:group-hover:top-0 lg:group-hover:left-0 
+                lg:group-hover:transform-none lg:group-hover:translate-x-0 lg:group-hover:translate-y-0 
+                lg:group-hover:px-5 lg:group-hover:py-3 transition-all duration-500"
               >
                 Logika Koding
               </h3>
-              <h5 class="text-sm text-white lg:mt-0 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pt-5">
+              <h5 class="text-sm text-white lg:mt-0 mt-2 
+                lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 lg:pt-5">
                 Beberapa Projek logika pemrograman saya dengan bahasa C
               </h5>
               <HashLink 
                 to="/my-skill#projectLogicSec"
-                class="flex justify-center items-center text-center sm:w-1/2 w-full sm:h-10 lg:mt-0 mt-7 py-1 bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold rounded-3xl opacity-0 hover group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
+                class="flex justify-center items-center text-center xl:w-2/3 lg:w-3/4 w-full sm:h-10 lg:mt-0 mt-7 py-1 
+                bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold 
+                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
               >
                 Lebih banyak
               </HashLink>

@@ -36,7 +36,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
         style={{ backgroundImage: "url('/tekstur abu.jpeg')" }}
       >
         {/* Home Section */}
-        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full mx-auto bg-gradient-to-t from-black/0 via-black/95 to-black pb-96 pt-10 mt-12 rounded-t-3xl relative" ref={homeRef}>
+        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full mx-auto bg-gradient-to-t from-black/0 via-black/100 to-black lg:pb-96 sm:pb-80 pb-52 pt-10 mt-12 rounded-t-3xl relative" ref={homeRef}>
           <Home 
             scrollToSection={scrollToSection}  // Passing props for navigation
             homeRef={homeRef} 
@@ -50,17 +50,17 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
         <div 
           id="motivation"
           ref={motivationRef}
-          className={`xl:w-[78%] lg:w-[90%] w-[93%] mx-auto mb-32 mt-1 transition-transform duration-300 ${
+          className={`xl:w-[78%] lg:w-[90%] w-[93%] mx-auto lg:mb-24 mb-16 md:mt-1 transition-transform duration-300 ${
             visibleSections["motivation"] ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
           }`}
         >
           <h2 className="text-2xl font-bold text-center">
-            "Tak akan ada mimpi yang bisa dicapai, bila tidak diperjuangkan", tanpa aksi yang nyata mimpi kita hanyalah halusinasi, dan ingatlah bahwa dalam stiap usaha kita selalu berhadapan dengan masalah, sehingga "apapun yang terjadi, tetaplah bernapas dengan tenang", tetap kendalikan emosi kita, kendalikan hati kita, pikiran yang tenang adalah jalan terbaik di setiap masalah. Laut hanya menjadi ganas, karena ada badai bergejolak di atasnya."
+            "Tak akan ada mimpi yang bisa dicapai, bila tidak diperjuangkan", tanpa aksi yang nyata mimpi kita hanyalah halusinasi, dan ingatlah bahwa dalam stiap usaha kita selalu berhadapan dengan masalah, sehingga "apapun yang terjadi, tetaplah bernapas dengan tenang", tetap kendalikan emosi kita, kendalikan hati kita, pikiran yang tenang adalah jalan terbaik di setiap masalah. Laut hanya menjadi ganas, ketika ada badai bergejolak di atasnya."
           </h2>
         </div>
 
         {/* Main Section Wrapper */}
-        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-b md:from-black/0 md:via-black/30 md:to-black md:rounded-3xl py-16 mb-20 scroll-smooth">
+        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-b md:from-black/0 md:via-black/30 md:to-black md:rounded-3xl py-16 md:mb-20 scroll-smooth">
     
           {/* About Me Section */}
           <div className="xl:w-[89%] lg:w-[96%] w-full mx-auto py-16" ref={aboutMeRef}>
@@ -73,7 +73,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
           </div>
 
           {/* Skill Section */}
-          <div className="xl:w-[89%] lg:w-[96%] w-full mx-auto py-16" ref={skillRef}>
+          <div className="xl:w-[89%] lg:w-[96%] w-full mx-auto md:py-16 pt-16 pb-8" ref={skillRef}>
             <Skill />
           </div>
 
@@ -100,7 +100,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
         <div className="w-full h-1"></div>
 
         {/* Email Me Section */}
-        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-t md:from-black/0 md:via-black/90 md:to-black pb-64 pt-5 mt-20 rounded-t-3xl" ref={queriesRef}>
+        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-t md:from-black/0 md:via-black/90 md:to-black md:pb-64 pt-5 md:mt-20 mt-10 md:mb-20 mb-8 rounded-t-3xl" ref={queriesRef}>
           <Queries />
         </div>
 

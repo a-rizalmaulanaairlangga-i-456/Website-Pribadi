@@ -6,14 +6,14 @@ import Contact from "./contact"; // Importing the Contact component for the cont
 function MoreAll({ section }) {
   return (
     <div 
-      className="min-h-screen bg-cover bg-center pt-20" 
-      style={{ backgroundImage: "url('/tekstur abu.jpeg')" }} // Setting background image for the section
-    >
+      className="w-full h-full text-white pt-20"
+      style={{ backgroundImage: "url('/tekstur abu.jpeg')" }}
+>
       <>
         {/* Section: All About Me with Gradient Background */}
         <div 
           id="allAboutMe" 
-          className="w-[96%] mx-auto bg-gradient-to-t from-black/0 via-black/90 to-black pb-28 pt-24 rounded-t-3xl relative"
+          className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full md:mx-auto md:bg-gradient-to-t md:from-black/0 md:via-black/95 md:to-black md:rounded-3xl md:pb-28 pt-24 rounded-t-3xl relative"
         >
           {/* Title for the section */}
           <h2 className="text-center font-bold text-3xl underline text-white mb-24">
@@ -21,18 +21,18 @@ function MoreAll({ section }) {
           </h2>
           
           {/* AboutMe Component: Displays information about the user */}
-          <div className="w-[89%] mx-auto">
+          <div className="xl:w-[89%] lg:w-[96%] w-full mx-auto">
             <AboutMe />
           </div>
 
           {/* Skill Component: Displays the user's skills */}
-          <div className="mt-36 w-[89%] mx-auto">
+          <div className="xl:w-[89%] lg:w-[96%] w-full mt-36 mx-auto">
             <Skill />
           </div>
         </div>
 
         {/* Section: Contact */}
-        <div className="w-[96%] mx-auto bg-gradient-to-b from-black/0 via-black/80 to-black pb-16 mt-52 pt-48">
+        <div>
           {/* Contact Component: Displays the contact details */}
           <Contact />
         </div>

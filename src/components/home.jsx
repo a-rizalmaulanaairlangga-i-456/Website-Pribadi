@@ -6,7 +6,7 @@ import { Questions } from './queries.jsx';
 // Komponen TypingEffect untuk menampilkan teks dengan efek mengetik
 const TypingEffect = () => {
   // Array teks yang akan ditampilkan
-  const texts = ["Selamat Datang di Website Saya", "Saya Rizal", "Saya Seorang Mahasiswa IT"];
+  const texts = ["Selamat Datang di Website Pribadi Saya", "Saya Rizal", "Saya Seorang Mahasiswa IT"];
   
   // State untuk teks yang sedang ditampilkan
   const [displayedText, setDisplayedText] = useState(""); 
@@ -53,7 +53,7 @@ const TypingEffect = () => {
 
   return (
     <div id="app" className="flex items-center">
-      <div className="text-[3rem] font-bold font-mono">
+      <div className="text-[3rem] font-bold font-mono leading-none">
         <span>Haloo, {displayedText}</span>
         <span className="inline-block w-[1px] bg-black animate-blink">|</span>
       </div>
