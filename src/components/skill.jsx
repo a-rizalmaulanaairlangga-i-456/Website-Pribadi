@@ -60,7 +60,7 @@ const Skill = () => {
                 href="https://github.com/rizalitpens"
                 target="_blank" // Membuka tautan di tab baru
                 rel="noopener noreferrer" // Meningkatkan keamanan tautan
-                class="w-[45%] h-12 bg-white/0 backdrop-blur-sm text-white font-semibold rounded-3xl hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
+                class="w-[45%] h-12 bg-white/0 backdrop-blur-sm text-white font-semibold rounded-3xl active:bg-white/40 hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
               >
                 Git Hub
               </a>
@@ -74,7 +74,7 @@ const Skill = () => {
             href="https://github.com/rizalitpens"
             target="_blank"
             rel="noopener noreferrer"
-            class="lg:hidden sm:w-[20%] w-[50%] h-12 mb-8 bg-white/0 backdrop-blur-sm text-white font-semibold rounded-3xl hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
+            class="lg:hidden sm:w-[20%] w-[50%] h-12 mb-8 bg-white/0 backdrop-blur-sm text-white font-semibold rounded-3xl hover:bg-white/20 active:bg-white/40 border-2 border-white transition-all duration-500 flex items-center justify-center"
           >
             Git Hub
           </a>
@@ -106,7 +106,7 @@ const Skill = () => {
                 to="/my-skill#projectWebSec"
                 class="flex justify-center items-center text-center xl:w-2/3 lg:w-3/4 w-full sm:h-10 lg:mt-0 mt-7 py-1 
                 bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold 
-                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
+                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 active:bg-white/40 hover:bg-white/20 transition-all duration-500"
               >
                 Lebih banyak
               </HashLink>
@@ -144,7 +144,7 @@ const Skill = () => {
                 to="/my-skill#projectLogicSec"
                 class="flex justify-center items-center text-center xl:w-2/3 lg:w-3/4 w-full sm:h-10 lg:mt-0 mt-7 py-1 
                 bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold 
-                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
+                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 active:bg-white/40 hover:bg-white/20 transition-all duration-500"
               >
                 Lebih banyak
               </HashLink>

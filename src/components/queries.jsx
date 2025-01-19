@@ -91,7 +91,7 @@ const FAQ = () => {
                   : "max-h-0 duration-700 ease-in"
               }`}
             >
-              <p className="mt-3 text-gray-400 sm:text-lg text-base">{faq.answer}</p>
+              <p className="mt-3 text-white/80 sm:text-lg text-base">{faq.answer}</p>
             </div>
           </div>
         ))}

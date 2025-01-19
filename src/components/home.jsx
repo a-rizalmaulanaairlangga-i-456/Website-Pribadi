@@ -53,7 +53,7 @@ const TypingEffect = () => {
 
   return (
     <div id="app" className="flex items-center">
-      <div className="text-[3rem] font-bold font-mono leading-none">
+      <div className="md:text-5xl sm:text-4xl text-2xl font-bold font-mono leading-none">
         <span>Haloo, {displayedText}</span>
         <span className="inline-block w-[1px] bg-black animate-blink">|</span>
       </div>
@@ -95,7 +95,7 @@ const Home = ({ scrollToSection, homeRef, skillRef, aboutMeRef, queriesRef }) =>
       }`}
     >
       {/* Bagian DisplayText - Menampilkan efek ketik */}
-      <div className="w-full text-3xl font-bold mb-8 p-5">
+      <div className="w-full font-bold lg:mb-8 lg:p-5">
         <TypingEffect />
       </div>
 
@@ -115,7 +115,7 @@ const Home = ({ scrollToSection, homeRef, skillRef, aboutMeRef, queriesRef }) =>
               <p className="text-lg mb-7">
                 Saya adalah seorang Mahasiswa yang saat ini menempuh pendidikan D4 Teknik Informatika.
               </p>
-              <button className="px-4 py-1 text-white font-semibold rounded-3xl border-2 border-white mb-12 hover:shadow-[0_4px_10px_rgba(255,255,255,0.6)] transition-all duration-300" onClick={() => scrollToSection(aboutMeRef)}>
+              <button className="px-4 py-1 text-white font-semibold rounded-3xl border-2 border-white mb-12 hover:shadow-[0_4px_10px_rgba(255,255,255,0.6)] bg-white/0 active:bg-white/30 transition-all duration-300" onClick={() => scrollToSection(aboutMeRef)}>
                 Lebih banyak
               </button>
 
@@ -123,7 +123,7 @@ const Home = ({ scrollToSection, homeRef, skillRef, aboutMeRef, queriesRef }) =>
               <p className="text-lg mb-7">
                 Saya menguasai pemrograman website dan bahasa C sebagai bahasa logika pemrograman.
               </p>
-              <button className="px-4 py-1 text-white font-semibold rounded-3xl border-2 border-white hover:shadow-[0_4px_10px_rgba(255,255,255,0.6)] transition-all duration-300" onClick={() => scrollToSection(skillRef)}>
+              <button className="px-4 py-1 text-white font-semibold rounded-3xl border-2 border-white hover:shadow-[0_4px_10px_rgba(255,255,255,0.6)] bg-white/0 active:bg-white/30 transition-all duration-300" onClick={() => scrollToSection(skillRef)}>
                 Lebih banyak
               </button>
             </div>
@@ -161,7 +161,7 @@ const Home = ({ scrollToSection, homeRef, skillRef, aboutMeRef, queriesRef }) =>
           {hovered === 'right' ? (
             <div className="w-full">
               <Questions />
-              <button className="px-4 py-1 text-white font-semibold rounded-3xl border-2 border-white hover:shadow-[0_4px_10px_rgba(255,255,255,0.6)] transition-all duration-300 ml-12 mt-10" onClick={() => scrollToSection(queriesRef)}>
+              <button className="px-4 py-1 text-white font-semibold rounded-3xl border-2 border-white hover:shadow-[0_4px_10px_rgba(255,255,255,0.6)] bg-white/0 active:bg-white/30 transition-all duration-300 ml-12 mt-10" onClick={() => scrollToSection(queriesRef)}>
                 Lebih banyak
               </button>
             </div>

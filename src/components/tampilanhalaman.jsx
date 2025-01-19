@@ -36,7 +36,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
         style={{ backgroundImage: "url('/tekstur abu.jpeg')" }}
       >
         {/* Home Section */}
-        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full mx-auto bg-gradient-to-t from-black/0 via-black/100 to-black lg:pb-96 sm:pb-80 pb-52 pt-10 mt-12 rounded-t-3xl relative" ref={homeRef}>
+        <div className="xl:w-[96%] lg:w-[97%] md:w-[98%] w-full mx-auto bg-gradient-to-t from-black/0 via-black/100 to-black lg:pb-96 sm:pb-80 pb-28 pt-10 mt-12 rounded-t-3xl relative" ref={homeRef}>
           <Home 
             scrollToSection={scrollToSection}  // Passing props for navigation
             homeRef={homeRef} 
@@ -85,7 +85,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
               ref={buttonMoreAllRefs}
               className={`
                 px-6 py-2 border-2 border-white rounded-3xl text-lg font-medium bg-black
-                hover:bg-white hover:text-black
+                hover:bg-white hover:text-black active:shadow-[0_10px_15px_rgba(255,255,255,0.6)]
                 transition-all duration-700
                 ${visibleSections["buttonMoreAll"]
                   ? "translate-y-0 opacity-100"

@@ -205,34 +205,34 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
 
       {/* Dropdown Menu for Mobile */}
       {isMenuOpen && (
-        <div className="md:hidden mt-4 bg-neutral-900 rounded-lg shadow-lg text-white">
+        <div className="md:hidden mt-4 bg-neutral-800 rounded-lg shadow-lg text-white">
           <button
             onClick={() => handleNavigation(aboutMeRef)}
-            className="block px-4 py-2 hover:bg-zinc-800 w-full text-left"
+            className="block px-4 py-2 hover:bg-zinc-800 active:bg-zinc-900 w-full text-left rounded-t-lg"
           >
             Tentang
           </button>
           <button
             onClick={() => handleNavigation(cardStackRef)}
-            className="block px-4 py-2 hover:bg-zinc-800 w-full text-left"
+            className="block px-4 py-2 hover:bg-zinc-800 active:bg-zinc-900 w-full text-left"
           >
             Alat
           </button>
           <button
             onClick={() => handleNavigation(skillRef)}
-            className="block px-4 py-2 hover:bg-zinc-800 w-full text-left"
+            className="block px-4 py-2 hover:bg-zinc-800 active:bg-zinc-900 w-full text-left"
           >
             Keahlian
           </button>
           <button
             onClick={() => handleNavigation(queriesRef)}
-            className="block px-4 py-2 hover:bg-zinc-800 w-full text-left"
+            className="block px-4 py-2 hover:bg-zinc-800 active:bg-zinc-900 w-full text-left"
           >
             Pertanyaan
           </button>
           <button
             onClick={() => handleNavigation(contactRef)}
-            className="block px-4 py-2 hover:bg-zinc-800 w-full text-left"
+            className="block px-4 py-2 hover:bg-zinc-800 active:bg-zinc-900 w-full text-left rounded-b-lg"
           >
             Kontak
           </button>

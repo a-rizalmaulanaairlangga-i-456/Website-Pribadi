@@ -58,7 +58,7 @@ const AboutMe = () => {
                 href="https://www.canva.com/design/DAGcDuXrLuA/OCfppTRVaHwFLhjgeNec-w/edit?utm_content=DAGcDuXrLuA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
                 target="_blank" // Membuka tautan di tab baru
                 rel="noopener noreferrer" // Meningkatkan keamanan tautan
-                class="w-[45%] h-12 bg-white/0 backdrop-blur-sm text-white font-semibold rounded-3xl hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
+                class="w-[45%] h-12 bg-white/0 backdrop-blur-sm text-white font-semibold rounded-3xl active:bg-white/40 hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
               >
                 CV dokumen
               </a>
@@ -72,7 +72,7 @@ const AboutMe = () => {
             href="https://www.canva.com/design/DAGcDuXrLuA/OCfppTRVaHwFLhjgeNec-w/edit?utm_content=DAGcDuXrLuA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
             target="_blank"
             rel="noopener noreferrer"
-            class="lg:hidden sm:w-[20%] w-[50%] h-12 mb-8 bg-black/30 backdrop-blur-sm text-white font-semibold rounded-3xl hover:bg-black/45 border-2 border-white transition-all duration-500 flex items-center justify-center"
+            class="lg:hidden sm:w-[20%] w-[50%] h-12 mb-8 bg-black/30 backdrop-blur-sm text-white font-semibold rounded-3xl hover:bg-black/45 active:bg-black/55 border-2 border-white transition-all duration-500 flex items-center justify-center"
           >
             CV dokumen
           </a>
@@ -106,7 +106,7 @@ const AboutMe = () => {
                 to="/about-me#academicAchiev"
                 class="flex justify-center items-center text-center xl:w-2/3 lg:w-3/4 w-full sm:h-10 lg:mt-0 mt-7 py-1 
                 bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold 
-                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
+                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 active:bg-white/40 hover:bg-white/20 transition-all duration-500"
               >
                 Lebih banyak
               </HashLink>
@@ -146,7 +146,7 @@ const AboutMe = () => {
                 to="/about-me#nonAcademicAchiev"
                 class="flex justify-center items-center text-center xl:w-2/3 lg:w-3/4 w-full sm:h-10 lg:mt-0 mt-7 py-1 
                 bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold 
-                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 hover:bg-white/20 transition-all duration-500"
+                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 active:bg-white/40 hover:bg-white/20 transition-all duration-500"
               >
                 Lebih banyak
               </HashLink>
