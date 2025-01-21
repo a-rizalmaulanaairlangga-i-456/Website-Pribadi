@@ -28,6 +28,12 @@ const achievements = [
     image: "generus.jpg",
     link: "https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/ERW0JpDVZZ5OjUBrX6RbNFcBYenH_3FgtWtR-DKPZZCS9g?e=fvux8W",
   },
+  {
+    id: 5,
+    title: "Big Fair Surabaya",
+    image: "bigFair.png",
+    link: "https://penssby-my.sharepoint.com/:f:/g/personal/3124600033_msoffice_pens_ac_id/EoxuFbRUDo1Olav7oN9f47sBMoYf3B4Z3x0SvMuMayHZag?e=TxUgCd",
+  }
 ];
 
 // Component for displaying non-academic achievements
