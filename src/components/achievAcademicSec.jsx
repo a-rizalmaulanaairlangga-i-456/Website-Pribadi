@@ -7,37 +7,37 @@ const achievements = [
     id: 1,
     title: "SEAOSM",
     image: "SEAOSM.png",
-    link: "https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/ESYdQV5p_Y5ImsTVJ4ezWh0BZlX01Yi10qL3whs2kHgZ5g?e=KaD2wb",
+    link: "https://drive.google.com/file/d/17L1TlA7VPls22wSs1t2x0htkLe03m1Gy/view?usp=sharing",
   },
   {
     id: 2,
     title: "NLC",
     image: "NLC.png",
-    link: "https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/EZLT8q7WPQpHpJXIj81HLegBwmHZJnygSw1ytQRqhm0NUg?e=b3fKHF",
+    link: "https://drive.google.com/file/d/1XX49M8FTMUoS4uz5BMgSZB8mP7c4kk4E/view?usp=sharing",
   },
   {
     id: 3,
     title: "NSO VOL.2",
     image: "NSO.png",
-    link: "https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/ESnD0xp8FvNAhXLboNPjWsYBO6EQzcUtvTed_J004VHLUQ?e=pootcn",
+    link: "https://drive.google.com/file/d/11YyfVYP_4DOHedEKkn8XXMNchzHFnPek/view?usp=sharing",
   },
   {
     id: 4,
     title: "IYSHO",
     image: "IYSHO.png",
-    link: "https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/EdakbQgUgTlHllAtw5O4l2QBldAOq2G6taqmMMMVA6J-0w?e=StF1IU",
+    link: "https://drive.google.com/file/d/1XvKe5r_BnMzXSvhqBaUrkKoJByl-coj1/view?usp=sharing",
   },
   {
     id: 5,
     title: "ISMO",
     image: "ISMO.png",
-    link: "https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/EbbKfSsVA0FHnCGF9vIMZFQBtxn3rzLSdw-jt09OzIkGcw?e=oCs9NY",
+    link: "https://drive.google.com/file/d/1Uz-WhVppdDEvseywdPyhQrHbKQFtP_tP/view?usp=sharing",
   },
   {
     id: 6,
     title: "FOSPAN",
     image: "FOSPAN.png",
-    link: "https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/Ee5O2hazaZRPmtiL3sA_xeYBo11jG3WR51IqbetSCAqaVw?e=4y33iY",
+    link: "https://drive.google.com/file/d/1Bnt93RYJ_Cd7bbpnqlP_ZRfOUcH73MaE/view?usp=sharing",
   },
 ];
 

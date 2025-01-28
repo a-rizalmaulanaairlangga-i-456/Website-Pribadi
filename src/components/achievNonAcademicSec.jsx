@@ -8,31 +8,31 @@ const achievements = [
     id: 1,
     title: "Mural",
     image: "mural.png",
-    link: "https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/EWJwjI79219AjII_bUsYlwoBAUFkkVXY6Hd5oDI0dsVB8g?e=nkrnWe",
+    link: "https://drive.google.com/file/d/1K5_evDiyG0rmERRlRxVLfAw4gO4hx8Tm/view?usp=sharing",
   },
   {
     id: 2,
     title: "Photographer",
     image: "inc1.jpg",
-    link: "https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/ETk__pmczEZIpoRvA5L4hz0BlKFTSFmgGBnEWQUMHO7DYA?e=a5IjCF",
+    link: "https://drive.google.com/file/d/1WJa-9OzJdD9dFL3UUBUXLweEv4SdDgwH/view?usp=sharing",
   },
   {
     id: 3,
     title: "Wakil Pimpinan Redaksi",
     image: "inc2.jpg",
-    link: "https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/EaZhfSqWwAFLh_gsvvgzDOIBO3DehyXISvCIANaIO3tIqA?e=7ymAMQ",
+    link: "https://drive.google.com/file/d/1ZHGljmXCAVe1SiLV-lE0QsnMgo2nQU45/view?usp=sharing",
   },
   {
     id: 4,
     title: "Generus",
     image: "generus.jpg",
-    link: "https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/ERW0JpDVZZ5OjUBrX6RbNFcBYenH_3FgtWtR-DKPZZCS9g?e=fvux8W",
+    link: "https://drive.google.com/file/d/1P0Wf4SFcYq-vuGtXjLekETXc-t1jnLSt/view?usp=sharing",
   },
   {
     id: 5,
     title: "Big Fair Surabaya",
     image: "bigFair.png",
-    link: "https://penssby-my.sharepoint.com/:f:/g/personal/3124600033_msoffice_pens_ac_id/EoxuFbRUDo1Olav7oN9f47sBMoYf3B4Z3x0SvMuMayHZag?e=TxUgCd",
+    link: "https://drive.google.com/drive/folders/1hrDglMJ0w3M3B25uIVcTxynr5pbkn7ME?usp=sharing",
   }
 ];
 
