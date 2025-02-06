@@ -50,7 +50,7 @@ const Skill = () => {
           <div class="relative w-[90%] mx-auto">
             <div class="relative z-10">
               <h2 class="text-2xl font-semibold text-white">
-              Saya menguasai posisi sebagai front-end development, yang dibuktikan melalui berbagai proyek, contohnya website Portofolio yang anda lihat saat ini!! Selain itu, saya juga menguasai bahasa pemrograman C, yang menjadi dasar untuk memahami dan menerapkan logika pemrograman.
+              Saya menguasai posisi sebagai front-end development, yang dibuktikan melalui berbagai proyek, contohnya website Portofolio responsif yang anda lihat saat ini!! Selain itu, saya juga menguasai bahasa pemrograman C, yang menjadi dasar untuk memahami dan menerapkan logika pemrograman.
               </h2>
             </div>
 

@@ -5,14 +5,14 @@ import { AnimationContext } from "../App"; // Mengimpor konteks animasi dari App
 // Daftar alat yang digunakan dalam proyek
 const tools = [
   {
-    name: 'Framer',
-    image: 'framer.png',
-    description: 'Framer adalah alat untuk membuat prototipe website dengan desain interaktif. Namun saya menggunakannya untuk mendapatkan ide desain website yang saya inginkan.',
-  },
-  {
     name: 'VSCode',
     image: 'vscode.png',
     description: 'VSCode adalah editor kode yang saya gunakan untuk membuat berbagai program, mulai dari pemrograman bahasa C hingga pemrograman website.',
+  },
+  {
+    name: 'Framer',
+    image: 'framer.png',
+    description: 'Framer adalah alat untuk membuat prototipe website dengan desain interaktif. Namun saya menggunakannya untuk mendapatkan ide desain website yang saya inginkan.',
   },
   {
     name: 'Tailwind',
@@ -45,9 +45,9 @@ const tools = [
     description: 'Canva adalah platform desain grafis online yang saya gunakan untuk membuat berbagai desain, mulai dari logo hingga poster, termasuk juga CV dokumen yang saya buat.',
   },
   {
-    name: 'Onedrive',
-    image: 'onedrive.png',
-    description: 'OneDrive adalah layanan penyimpanan cloud dari Microsoft yang memungkinkan pengguna untuk menyimpan file, foto, dan dokumen secara online.',
+    name: 'Google Drive',
+    image: 'google-drive.png',
+    description: 'Google Drive adalah layanan penyimpanan berbasis cloud yang disediakan oleh Google. Saya menggunakan Google Drive untuk menyimpan berbagai file dan dokumen backup.',
   },
   {
     name: 'ChatGPT',
