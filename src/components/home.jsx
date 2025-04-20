@@ -121,7 +121,7 @@ const Home = ({ scrollToSection, homeRef, skillRef, aboutMeRef, queriesRef }) =>
 
               <p className="text-xl font-semibold mt-6 mb-1">Keahlian Saya:</p>
               <p className="text-lg mb-7">
-                Saya menguasai pemrograman website dan bahasa C sebagai bahasa logika pemrograman.
+                Saya menguasai frontend, bahasa pemrograman C, PHP dan SQL.
               </p>
               <button className="px-4 py-1 text-white font-semibold rounded-3xl border-2 border-white hover:shadow-[0_4px_10px_rgba(255,255,255,0.6)] bg-white/0 active:bg-white/30 transition-all duration-300" onClick={() => scrollToSection(skillRef)}>
                 Lebih banyak

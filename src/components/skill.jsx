@@ -57,10 +57,10 @@ const Skill = () => {
             {/* Tombol untuk menuju ke halaman GitHub */}
             <div class="relative z-10 mt-10 hidden lg:block">
               <a
-                href="https://github.com/rizalitpens"
+                href="https://github.com/a-rizalmaulanaairlangga-i-456"
                 target="_blank" // Membuka tautan di tab baru
                 rel="noopener noreferrer" // Meningkatkan keamanan tautan
-                class="w-[45%] h-12 bg-white/0 backdrop-blur-sm text-white font-semibold rounded-3xl active:bg-white/40 hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
+                class="w-[45%] h-12 bg-white/85 backdrop-blur-sm text-black font-semibold text-xl rounded-3xl active:bg-white/40 hover:bg-white/20 hover:text-white border-2 border-white transition-all duration-500 flex items-center justify-center"
               >
                 Git Hub
               </a>
@@ -74,7 +74,7 @@ const Skill = () => {
             href="https://github.com/rizalitpens"
             target="_blank"
             rel="noopener noreferrer"
-            class="lg:hidden sm:w-[20%] w-[50%] h-12 mb-8 bg-white/0 backdrop-blur-sm text-white font-semibold rounded-3xl hover:bg-white/20 active:bg-white/40 border-2 border-white transition-all duration-500 flex items-center justify-center"
+            class="lg:hidden sm:w-[20%] w-[50%] h-12 mb-8 bg-white/85 backdrop-blur-sm text-black font-semibold text-xl rounded-3xl hover:bg-white/20 hover:text-white active:bg-white/40 border-2 border-white transition-all duration-500 flex items-center justify-center"
           >
             Git Hub
           </a>
@@ -126,7 +126,7 @@ const Skill = () => {
               class="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: "url('/30.png')" }}
             ></div>
-            <div class="grid relative bg-black/20 h-full backdrop-blur-sm px-5 py-3 items-center justify-center z-40">
+            <div class="grid relative bg-white/5 h-full backdrop-blur-sm px-5 py-3 items-center justify-center z-40">
               <h3
                 class="text-lg lg:text-center lg:text-white font-semibold lg:absolute 
                 top-1/2 left-1/2 transform lg:-translate-x-1/2 lg:-translate-y-1/2 

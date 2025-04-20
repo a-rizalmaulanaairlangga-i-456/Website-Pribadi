@@ -6,17 +6,17 @@ const faqs = [
   {
     question: "Apa yang menjadi kelebihan dan kekuranganmu?", // Pertanyaan 1
     answer:
-      "Saya merupakan individu yang teguh terhadap pendirian saya, sehingga saya juga mampu menjaga konsistensi saya dalam mencapai suatu tujuan. Saya mudah beradaptasi dalam berbagai lingkungan, terbuka dengan pendapat orang lain menjadi salah hal yang membuat saya percaya diri untuk membawa pengaruh positif kepada lingkungan saya. Namun, juga saya akui bahwa meskipun rajin mencatat jadwal dan tugas, saya sendiri masih sering melupakan kegiatan-kegiatan yang sudah terjadwal",
+      "Saya merupakan individu yang teguh terhadap pendirian saya, sehingga saya mampu menjaga konsistensi saya dalam mencapai suatu tujuan. Saya mudah beradaptasi dalam berbagai lingkungan, terbuka dengan pendapat orang lain menjadi salah hal yang membuat saya percaya diri untuk membawa pengaruh positif kepada lingkungan saya. Namun, saya akui meskipun rajin mencatat jadwal dan tugas, saya sendiri masih sering melupakan kegiatan-kegiatan yang sudah terjadwal",
   },
   {
     question: "Di mana saya berkuliah, serta mengapa saya memilih Kampus dan jurusan saya saat ini?", // Pertanyaan 2
     answer:
-      "Saat ini saya berkuliah di Politeknik Elektronika Negeri Surabaya dengan prodi D4 Teknik Informatika. Didorong oleh perkembangan teknologi yang semakin maju, maka sebagai generasi penerus bangsa Saya ingin menjadi penerus yang profesional di bidang teknologi, khususnya pada pengembangan perangkat lunak. Memajukan berbagai bidang dengan pemanfaatan IoT, AI, dan Cloud Computing, yang merupakan rencana dari fokus studi saya kedepannya. ",
+      "Saat ini saya berkuliah di Politeknik Elektronika Negeri Surabaya dengan prodi D4 Teknik Informatika. Didorong oleh perkembangan teknologi yang semakin maju, maka sebagai generasi penerus bangsa sudah sepantasnya berusaha menjadi penerus yang profesional di bidang teknologi, khususnya pada pengembangan perangkat lunak. Terhitung dari semester pertama perkuliahan, satu sampai dua tahun ke depan saya memfokuskan diri untuk menekuni pengembangan website. ",
   },
   {
     question: "Apa rencana pendidikan saya dalam beberapa tahun ke depan?", // Pertanyaan 3
     answer:
-      "Dalam tahun pertama ini, saya ingin fokus untuk mengikuti kegiatan edukasi seperti komunitas, bootcamp atau workshop di dalam maupun di luar kampus. Di tahun kedua, saya ingin mulai aktif dalam kegiatan organisasi dan memulai proyek kolaboratif di bidang Informatika. Pada tahun ketiga, saya berencana fokus membangun portofolio di bidang akademik maupun non-akademik, termasuk juga proyek magang. Tahun terakhir berkuliah, saya akan memfokuskan diri pada Tugas Akhir, serta lulus tepat waktu dengan nilai memuaskan",
+      "Dalam tahun pertama ini, saya berencana berfokus untuk mengikuti kegiatan edukasi seperti komunitas, bootcamp atau workshop di dalam maupun di luar kampus. Di tahun kedua, saya ingin mulai aktif dalam kegiatan organisasi dan memulai proyek kolaboratif di bidang Informatika. Pada tahun ketiga, saya berencana fokus membangun portofolio di bidang akademik maupun non-akademik, termasuk juga proyek magang. Tahun terakhir berkuliah, saya akan memfokuskan diri pada Tugas Akhir, serta lulus tepat waktu dengan nilai memuaskan",
   },
 ];
 

@@ -1,6 +1,6 @@
 // src/components/tampilanhalaman.jsx
 import { HashLink } from 'react-router-hash-link';
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { AnimationContext } from "../App";
 
 // Importing other components used in the page
@@ -55,7 +55,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
           }`}
         >
           <h2 className="text-2xl font-bold text-center">
-            "Tak akan ada mimpi yang bisa dicapai, bila tidak diperjuangkan", tanpa aksi yang nyata mimpi kita hanyalah halusinasi, dan ingatlah bahwa dalam stiap usaha kita selalu berhadapan dengan masalah, sehingga "apapun yang terjadi, tetaplah bernapas dengan tenang", tetap kendalikan emosi kita, kendalikan hati kita, pikiran yang tenang adalah jalan terbaik di setiap masalah. Laut hanya menjadi ganas, ketika ada badai bergejolak di atasnya."
+            "Tak akan ada mimpi yang bisa dicapai, bila tidak diperjuangkan", tanpa aksi yang nyata mimpi kita hanyalah halusinasi, dan ingatlah bahwa dalam setiap usaha kita selalu berhadapan dengan masalah, sehingga "apapun yang terjadi, tetaplah bernapas dengan tenang", tetap kendalikan emosi kita, kendalikan hati kita, pikiran yang tenang adalah jalan terbaik di setiap masalah. Laut hanya menjadi ganas, ketika ada badai bergejolak di atasnya."
           </h2>
         </div>
 
@@ -84,8 +84,8 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
               id="buttonMoreAll"
               ref={buttonMoreAllRefs}
               className={`
-                px-6 py-2 border-2 border-white rounded-3xl text-lg font-medium bg-black
-                hover:bg-white hover:text-black active:shadow-[0_10px_15px_rgba(255,255,255,0.6)]
+                px-6 py-2 border-2 border-white text-black rounded-3xl text-lg font-medium bg-white
+                hover:bg-black hover:text-white active:shadow-[0_10px_15px_rgba(255,255,255,0.6)]
                 transition-all duration-700
                 ${visibleSections["buttonMoreAll"]
                   ? "translate-y-0 opacity-100"
@@ -93,7 +93,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
                 }
               `}
             >
-              Lebih banyak
+              Selengkapnya
             </HashLink>
           </div>
         </div>

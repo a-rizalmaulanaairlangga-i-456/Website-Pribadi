@@ -58,9 +58,9 @@ const AboutMe = () => {
                 href="https://www.canva.com/design/DAGcDuXrLuA/OCfppTRVaHwFLhjgeNec-w/edit?utm_content=DAGcDuXrLuA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
                 target="_blank" // Membuka tautan di tab baru
                 rel="noopener noreferrer" // Meningkatkan keamanan tautan
-                class="w-[45%] h-12 bg-white/0 backdrop-blur-sm text-white font-semibold rounded-3xl active:bg-white/40 hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
+                class="w-[45%] h-12 bg-white/85 text-xl text-black backdrop-blur-sm font-semibold rounded-3xl hover:text-white active:bg-white/40 hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
               >
-                CV dokumen
+                lihat CV
               </a>
             </div>
           </div>
@@ -72,9 +72,9 @@ const AboutMe = () => {
             href="https://www.canva.com/design/DAGcDuXrLuA/OCfppTRVaHwFLhjgeNec-w/edit?utm_content=DAGcDuXrLuA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
             target="_blank"
             rel="noopener noreferrer"
-            class="lg:hidden sm:w-[20%] w-[50%] h-12 mb-8 bg-black/30 backdrop-blur-sm text-white font-semibold rounded-3xl hover:bg-black/45 active:bg-black/55 border-2 border-white transition-all duration-500 flex items-center justify-center"
+            class="lg:hidden sm:w-[20%] w-[50%] h-12 mb-8 bg-white/85 text-xl text-black backdrop-blur-sm font-semibold rounded-3xl hover:bg-white/45 hover:text-white active:bg-white/55 border-2 border-white transition-all duration-500 flex items-center justify-center"
           >
-            CV dokumen
+            lihat CV
           </a>
         </div>
 
@@ -86,32 +86,46 @@ const AboutMe = () => {
               class="absolute inset-0 bg-cover bg-center"
               style={{backgroundImage: "url('/NLC.png')"}}
             ></div>
-            <div class="grid relative bg-black/20 h-full backdrop-blur-sm px-5 py-3 items-center justify-center z-40">
-              <h3
-                class="text-lg lg:text-center lg:text-neutral-700 font-semibold lg:absolute 
-                top-1/2 left-1/2 transform lg:-translate-x-1/2 lg:-translate-y-1/2 
-                lg:group-hover:text-white lg:group-hover:top-0 lg:group-hover:left-0 
-                lg:group-hover:transform-none lg:group-hover:translate-x-0 lg:group-hover:translate-y-0 
-                lg:group-hover:px-5 lg:group-hover:py-3 transition-all duration-500"
-              >
-                Akademik
-              </h3>
-              <h5 
-                class="text-sm text-white lg:mt-0 mt-2 
-                lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 lg:pt-4"
-              >
-                Beberapa sertifikat di bidang akademik yang saya raih semasa SMA
-              </h5>
-              <HashLink 
-                to="/about-me#academicAchiev"
-                class="flex justify-center items-center text-center xl:w-2/3 lg:w-3/4 w-full sm:h-10 lg:mt-0 mt-7 py-1 
-                bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold 
-                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 active:bg-white/40 hover:bg-white/20 transition-all duration-500"
-              >
-                Lebih banyak
-              </HashLink>
-            </div>
-            <div
+<div class="group relative grid bg-black/20 h-full backdrop-blur-sm px-5 py-3 items-center justify-center z-40">
+
+{/* Judul utama */}
+<h3
+  class="text-lg text-neutral-700 font-semibold 
+         absolute top-1/2 left-1/2 
+         transform -translate-x-1/2 -translate-y-1/2 scale-125 
+         group-hover:-translate-x-[150%] group-hover:-translate-y-[310%] 
+         group-hover:scale-100 group-hover:text-white 
+         transition-all duration-500 ease-in-out 
+         will-change-transform"
+>
+  Akademik
+</h3>
+
+{/* Subjudul muncul setelah 200ms */}
+<h5 
+  class="text-sm text-white lg:mt-2 mt-2 
+         opacity-100 lg:opacity-0 group-hover:opacity-100 
+         transition-opacity duration-500 ease-in-out delay-200"
+>
+  Beberapa sertifikat di bidang akademik yang saya raih semasa SMA
+</h5>
+
+{/* Tombol muncul setelah 400ms */}
+<HashLink 
+  to="/about-me#academicAchiev"
+  class="opacity-100 lg:opacity-0 group-hover:opacity-100 
+         transition-opacity duration-500 delay-300 ease-in-out 
+         xl:w-2/3 lg:w-3/4 w-full sm:h-10 lg:mt-0 mt-7 py-1 rounded-3xl"
+>
+  <div class="flex justify-center items-center text-center h-full w-full 
+              bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold 
+              rounded-3xl active:bg-white/40 hover:bg-white/20 
+              transition-[transform,color,background-color] duration-500 ease-in-out transform scale-105 hover:scale-100">
+    Lebih banyak
+  </div>
+</HashLink>
+</div>
+          <div
               class="absolute bottom-0 w-full 
               lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500"
               style={{
@@ -140,7 +154,7 @@ const AboutMe = () => {
               </h3>
               <h5 class="text-sm text-white lg:mt-0 mt-2 
                 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 lg:pt-4">
-                Beberapa sertifikat non-akademik yang saya raih semasa SMA
+                Beberapa sertifikat non-akademik yang saya raih semasa SMA hingga saat ini
               </h5>
               <HashLink 
                 to="/about-me#nonAcademicAchiev"

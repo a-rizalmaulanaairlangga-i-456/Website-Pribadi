@@ -36,7 +36,7 @@ function ProjectWebSection() {
   }, [observeSections]);
 
   return (
-    <div className="text-center">
+    <div className="text-center mb-10">
       {/* Grid untuk menampilkan proyek */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-14 pt-10 px-14 w-full">
         {/* Iterasi untuk setiap proyek dalam array 'projects' */}

@@ -47,7 +47,7 @@ function CardProject({ section }) {
             visibleSections["logic"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <h2 className="text-4xl text-center font-bold pt-36 mb-10">
+          <h2 className="text-4xl text-center font-bold pt-20 mb-10">
             Projek Logika Pemrograman (dengan Bahasa Pemrograman C)
           </h2>
           <LogicProjects />
