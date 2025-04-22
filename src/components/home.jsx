@@ -62,7 +62,7 @@ const TypingEffect = () => {
 };
 
 // Komponen Home untuk menampilkan halaman utama
-const Home = ({ scrollToSection, homeRef, skillRef, aboutMeRef, queriesRef }) => {
+const Home = ({ scrollToSection, skillRef, aboutMeRef, queriesRef }) => {
   const [hovered, setHovered] = useState(null); // State untuk menyimpan item yang sedang di-hover
 
   // Fungsi untuk menentukan lebar section berdasarkan hover

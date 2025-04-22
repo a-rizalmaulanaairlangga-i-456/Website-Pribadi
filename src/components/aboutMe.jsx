@@ -20,16 +20,18 @@ const AboutMe = () => {
     <div
       id="about" 
       ref={aboutRef} 
-      className={`xl:w-[96%] lg:w-[98%] md:w-[98%] w-full h-[98%] md:mx-auto grid pb-12 md:rounded-3xl z-40 transition-all duration-300 ${
-        visibleSections["about"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-      } bg-cover lg:bg-center sm:bg-top`} // Responsif posisi latar
+      className={`xl:w-[96%] lg:w-[98%] md:w-[98%] w-full md:mx-auto grid lg:pb-12 pb-6 md:rounded-3xl z-40 transition-all duration-300
+        bg-no-repeat 
+        bg-[position:right_78%] md:bg-[position:right_62%] lg:bg-[position:50%_center]
+        bg-[size:140%] lg:bg-[size:100%]
+        ${
+          visibleSections["about"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }
+      `}
       style={{
-        position: 'relative',
-        backgroundImage: "url('aboutme.png')", // Latar belakang gambar
-        backgroundPositionX: '61%', // Mengatur posisi horizontal latar belakang
+        backgroundImage: "url('aboutme.jpg')",
       }}
     >
-
       {/* Header Tentang Saya */}
       <div
         className="flex justify-center items-center xl:w-[22%] lg:w-[25%] md:w-[29%] sm:w-[40%] w-[42%] xl:h-14 lg:h-12 md:h-11 sm:h-12 h-20 lg:py-1 text-center font-bold text-3xl text-white rounded-3xl relative mx-auto mt-3"
@@ -38,10 +40,13 @@ const AboutMe = () => {
         Tentang Saya
       </div>
 
+      {/* Memberikan space di layar kecil sampai sedang */}
+      <div class="lg:h-0 h-[7rem]"></div>
+
       {/* Konten utama */}
       <div class="grid grid-cols-1 lg:grid-cols-12 w-[96%] mx-auto mt-7 gap-5">
         {/* Bagian Deskripsi */}
-        <div class="col-span-1 lg:col-span-5 backdrop-blur-sm mx-auto py-5 rounded-3xl relative overflow-hidden lg:row-span-1">
+        <div class="col-span-1 lg:col-span-5 backdrop-blur-sm mx-auto py-5 rounded-3xl relative overflow-hidden">
           {/* Lapisan latar gelap */}
           <div class="absolute inset-0 bg-black/30 opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
@@ -52,131 +57,32 @@ const AboutMe = () => {
               </h2>
             </div>
 
-            {/* Tombol untuk melihat CV */}
-            <div class="relative z-10 mt-10 hidden lg:block">
-              <a
-                href="https://www.canva.com/design/DAGcDuXrLuA/OCfppTRVaHwFLhjgeNec-w/edit?utm_content=DAGcDuXrLuA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
-                target="_blank" // Membuka tautan di tab baru
-                rel="noopener noreferrer" // Meningkatkan keamanan tautan
-                class="w-[45%] h-12 bg-white/85 text-xl text-black backdrop-blur-sm font-semibold rounded-3xl hover:text-white active:bg-white/40 hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
-              >
-                lihat CV
-              </a>
-            </div>
           </div>
-        </div>
+          <div class="relative z-10 mt-10 flex gap-4 justify-center">
+            {/* Tombol Lihat CV */}
+            <a
+              href="https://www.canva.com/design/DAGcDuXrLuA/OCfppTRVaHwFLhjgeNec-w/edit?utm_content=DAGcDuXrLuA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-[45%] h-12 bg-white/85 text-xl text-black backdrop-blur-sm font-semibold rounded-3xl hover:text-white active:bg-white/40 hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
+            >
+              lihat CV
+            </a>
 
-        {/* Tombol CV untuk layar kecil */}
-        <div class="lg:col-span-4">
-          <a
-            href="https://www.canva.com/design/DAGcDuXrLuA/OCfppTRVaHwFLhjgeNec-w/edit?utm_content=DAGcDuXrLuA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="lg:hidden sm:w-[20%] w-[50%] h-12 mb-8 bg-white/85 text-xl text-black backdrop-blur-sm font-semibold rounded-3xl hover:bg-white/45 hover:text-white active:bg-white/55 border-2 border-white transition-all duration-500 flex items-center justify-center"
-          >
-            lihat CV
-          </a>
-        </div>
-
-        {/* Bagian Pencapaian */}
-        <div class="col-span-1 lg:col-span-3 flex lg:grid gap-5">
-          {/* Pencapaian Akademik */}
-          <div class="rounded-3xl relative overflow-hidden group w-full">
-            <div
-              class="absolute inset-0 bg-cover bg-center"
-              style={{backgroundImage: "url('/NLC.png')"}}
-            ></div>
-<div class="group relative grid bg-black/20 h-full backdrop-blur-sm px-5 py-3 items-center justify-center z-40">
-
-{/* Judul utama */}
-<h3
-  class="text-lg text-neutral-700 font-semibold 
-         absolute top-1/2 left-1/2 
-         transform -translate-x-1/2 -translate-y-1/2 scale-125 
-         group-hover:-translate-x-[150%] group-hover:-translate-y-[310%] 
-         group-hover:scale-100 group-hover:text-white 
-         transition-all duration-500 ease-in-out 
-         will-change-transform"
->
-  Akademik
-</h3>
-
-{/* Subjudul muncul setelah 200ms */}
-<h5 
-  class="text-sm text-white lg:mt-2 mt-2 
-         opacity-100 lg:opacity-0 group-hover:opacity-100 
-         transition-opacity duration-500 ease-in-out delay-200"
->
-  Beberapa sertifikat di bidang akademik yang saya raih semasa SMA
-</h5>
-
-{/* Tombol muncul setelah 400ms */}
-<HashLink 
-  to="/about-me#academicAchiev"
-  class="opacity-100 lg:opacity-0 group-hover:opacity-100 
-         transition-opacity duration-500 delay-300 ease-in-out 
-         xl:w-2/3 lg:w-3/4 w-full sm:h-10 lg:mt-0 mt-7 py-1 rounded-3xl"
->
-  <div class="flex justify-center items-center text-center h-full w-full 
-              bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold 
-              rounded-3xl active:bg-white/40 hover:bg-white/20 
-              transition-[transform,color,background-color] duration-500 ease-in-out transform scale-105 hover:scale-100">
-    Lebih banyak
-  </div>
-</HashLink>
-</div>
-          <div
-              class="absolute bottom-0 w-full 
-              lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500"
-              style={{
-                background: "linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.27))",
-                height: '100%',
-              }}
-            ></div>
-          </div>
-
-
-          {/* Pencapaian Non-Akademik */}
-          <div class="rounded-3xl relative overflow-hidden group w-full">
-            <div
-              class="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: "url('/inc2.jpg')" }}
-            ></div>
-            <div class="grid relative bg-black/20 h-full backdrop-blur-sm px-5 py-3 items-center justify-center z-40">
-              <h3
-                class="text-lg lg:text-center lg:text-white font-semibold lg:absolute 
-                top-1/2 left-1/2 transform lg:-translate-x-1/2 lg:-translate-y-1/2 
-                lg:group-hover:text-white lg:group-hover:top-0 lg:group-hover:left-0 
-                lg:group-hover:transform-none lg:group-hover:translate-x-0 lg:group-hover:translate-y-0 
-                lg:group-hover:px-5 lg:group-hover:py-3 transition-all duration-500"
-              >
-                Non-Akademik
-              </h3>
-              <h5 class="text-sm text-white lg:mt-0 mt-2 
-                lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500 lg:pt-4">
-                Beberapa sertifikat non-akademik yang saya raih semasa SMA hingga saat ini
-              </h5>
-              <HashLink 
-                to="/about-me#nonAcademicAchiev"
-                class="flex justify-center items-center text-center xl:w-2/3 lg:w-3/4 w-full sm:h-10 lg:mt-0 mt-7 py-1 
+            {/* Tombol Akademik */}
+            <HashLink
+              to="/about-me#academicAchiev"
+              class="flex justify-center items-center text-center h-12 w-[45%] 
                 bg-white/0 backdrop-blur-sm border-2 border-white text-white font-semibold 
-                rounded-3xl lg:opacity-0 lg:group-hover:opacity-100 active:bg-white/40 hover:bg-white/20 transition-all duration-500"
-              >
-                Lebih banyak
-              </HashLink>
-            </div>
-            <div
-              class="absolute bottom-0 w-full 
-              lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-500"
-              style={{
-                background: "linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1))",
-                height: '100%',
-              }}
-            ></div>
+                rounded-3xl active:bg-white/40 hover:bg-white/20 
+                transition-[transform,color,background-color] duration-500 ease-in-out 
+                transform scale-105 hover:scale-100"
+            >
+              Akademik
+            </HashLink>
           </div>
         </div>
       </div>
-
     </div>
   );
 };
