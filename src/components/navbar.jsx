@@ -12,19 +12,24 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
   };
 
   useEffect(() => {
-    // Add event listener for scroll when component mounts
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      // Cleanup the event listener when the component unmounts
-      window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      // Atur threshold scroll sesuai kebutuhan
+      if (window.scrollY > 100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
     };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Function for navigating to sections and scrolling to them
   const handleNavigation = (ref) => {
     if (location.pathname !== '/') {
       navigate('/'); // Navigate to homepage if not already there
-      setTimeout(() => scrollToSection(ref), 100); // Wait for navigation before scrolling to section
+      setTimeout(() => scrollToSection(ref), 50); // Wait for navigation before scrolling to section
     } else {
       scrollToSection(ref); // Scroll to the section directly if on homepage
     }
@@ -95,9 +100,9 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
       <div className="relative flex items-center justify-between max-w-[96%] mx-auto">
         {/* Logo Section */}
         <div
-          className={`text-sm transition-all duration-500 ease-in-out ${
+          className={`transition-all duration-500 ease-in-out ${
             isScrolled ? 'relative left-0' : 'relative left-6'
-          } logo w-fit`}
+          } w-fit`}
         >
           <img
             src="logo.png"
@@ -136,14 +141,18 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
         </div>
 
         {/* Navigation Menu Section (Hidden on small screens) */}
-        <div
-          className={`hidden md:flex items-center text-base transition-all duration-500 ease-in-out ${
-            isScrolled ? 'translate-x-0 justify-center' : 'translate-x-6 justify-end'
-          } flex-1`}
+        <div 
+          className={`hidden md:flex items-center text-base transition-all duration-1000 ease-in-out ${
+            isScrolled ? 'relative justify-center' : 'relative justify-end'
+          }`}
+          style={{
+            transform: isScrolled ? 'translateX(0)' : 'translateX(50px)',
+            width: '100%'
+          }}
         >
           <div
-            className={`flex transition-all duration-500 mx-14 ${
-              isScrolled ? 'bg-neutral-900 rounded-full w-fit px-7 py-2 -mb-3 gap-3' : 'py-1'
+            className={`flex transition-all duration-500 ${
+              isScrolled ? 'bg-neutral-900 rounded-full w-fit px-7 py-2 -mb-3 gap-3' : 'py-1 mr-14'
             }`}
           >
             <button
@@ -183,8 +192,8 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
 
         {/* Contact Menu Section */}
         <div
-          className={`hidden md:block text-sm transition-all duration-500 ease-in-out ${
-            isScrolled ? 'absolute right-0 top-3' : 'relative right-6'
+          className={`hidden md:block text-sm mr-4 transition-all duration-500 ease-in-out ${
+            isScrolled ? 'mr-0 translate-y-2' : ''
           }`}
         >
           <button
