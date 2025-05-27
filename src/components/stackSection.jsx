@@ -2,85 +2,69 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import Card from './card'; // Mengimpor komponen Card
 import { AnimationContext } from "../App"; // Mengimpor konteks animasi dari App.js
 
-// Daftar alat yang digunakan dalam proyek
-const tools = [
-  {
-    name: 'VSCode',
-    image: 'vscode.png',
-    description: 'VSCode adalah editor kode yang saya gunakan untuk membuat berbagai program, mulai dari pemrograman bahasa C hingga pemrograman website.',
-  },
-  {
-    name: 'Framer',
-    image: 'framer.png',
-    description: 'Framer adalah alat untuk membuat prototipe website dengan desain interaktif. Namun saya menggunakannya untuk mendapatkan ide desain website yang saya inginkan.',
-  },
-  {
-    name: 'Tailwind',
-    image: 'tailwind.png',
-    description: 'Tailwind adalah framework CSS yang saya gunakan untuk membuat desain website yang responsif dan mudah diatur.',
-  },
-  {
-    name: 'Git-Hub',
-    image: 'git-hub-putih.png',
-    description: 'GitHub adalah platform untuk pengembangan perangkat lunak dan kolaborasi, serta menyimpan, mengelola, dan mengontrol kode program.',
-  },
-  {
-    name: 'Vercel',
-    image: 'vercel.png',
-    description: 'Vercel adalah platform cloud untuk hosting dan deployment aplikasi web dan situs statis. Saya menggunakan Vercel untuk menghosting web berbasis React.js.',
-  },
-  {
-    name: 'Flaticon',
-    image: 'flaticon.png',
-    description: 'Flaticon adalah situs web yang menyediakan koleksi ikon berkualitas tinggi dan vektor yang dapat digunakan dalam berbagai proyek desain.',
-  },
-  {
-    name: 'Notion',
-    image: 'notion.png',
-    description: 'Notion adalah alat catatan yang memiliki banyak fitur, saya menggunakannya untuk mencatat code program dan kesalahan-kesalahan dalam penulisan code program saya.',
-  },
-  {
-    name: 'Canva',
-    image: 'canva.png',
-    description: 'Canva adalah platform desain grafis online yang saya gunakan untuk membuat berbagai desain, mulai dari logo hingga poster, termasuk juga CV dokumen yang saya buat.',
-  },
-  {
-    name: 'Google Drive',
-    image: 'google-drive.png',
-    description: 'Google Drive adalah layanan penyimpanan berbasis cloud yang disediakan oleh Google. Saya menggunakan Google Drive untuk menyimpan berbagai file dan dokumen backup.',
-  },
-  {
-    name: 'ChatGPT',
-    image: 'chatgpt.png',
-    description: 'ChatGPT adalah alat Open AI yang membantu saya dalam menyusun code program, logika pemrograman, dan hal lain yang saya butuhkan.',
-  },
-];
-
 const StackSection = () => {
-  // Mengambil state dan fungsi dari AnimationContext untuk kontrol animasi
+  // Hooks harus berada di awal komponen
   const { visibleSections, observeSections } = useContext(AnimationContext);
 
-  // Membuat refs untuk elemen-elemen yang diamati untuk animasi
   const title1Ref = useRef(null);
   const title2Ref = useRef(null);
   const instructionRef = useRef(null);
-  const cardRefs = useRef(tools.map(() => React.createRef())); // Ref untuk setiap Card
+  const [cardRefs, setCardRefs] = useState([]);
+  const [flippedCards, setFlippedCards] = useState({});
+  const [tools, setTools] = useState([]);
+  const [loadingTools, setLoadingTools] = useState(true);
+
+  // Ambil data dari Notion
+  useEffect(() => {
+    async function fetchTools() {
+      try {
+        const response = await fetch('http://localhost:3001/api/dbTools');
+        const json = await response.json();
+
+        const sorted = json.sort((a, b) => {
+          const numA = a.properties?.tool_id?.number || 0;
+          const numB = b.properties?.tool_id?.number || 0;
+          return numA - numB;
+        });
+
+        setTools(sorted);
+      } catch (error) {
+        console.error('Error fetching data from Notion:', error);
+      } finally {
+        setLoadingTools(false);
+      }
+    }
+    fetchTools();
+  }, []);
 
   useEffect(() => {
-    // Menggunakan observeSections untuk mengamati perubahan pada elemen-elemen yang ditargetkan
-    observeSections([title1Ref, title2Ref, instructionRef, ...cardRefs.current], [0.1]); // Mengubah threshold
-  }, [observeSections]);
+    if (tools.length > 0) {
+      setCardRefs(tools.map(() => React.createRef()));
+    }
+  }, [tools]);
 
-  // State untuk menyimpan status flip setiap kartu
-  const [flippedCards, setFlippedCards] = useState({});
+  useEffect(() => {
+    if (cardRefs.length === tools.length && cardRefs.length > 0) {
+      observeSections([title1Ref, title2Ref, instructionRef, ...cardRefs], [0.1]);
+    }
+  }, [cardRefs, observeSections, tools.length]);
 
-  // Fungsi untuk menangani aksi flip pada kartu
   const handleFlip = (index) => {
     setFlippedCards((prev) => ({
       ...prev,
-      [index]: !prev[index], // Toggle status flip untuk kartu yang dipilih
+      [index]: !prev[index],
     }));
   };
+
+  // Setelah semua hook di-deklarasikan, baru boleh ada kondisi seperti ini:
+  if (loadingTools) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-xl">Loading...</p>
+      </div>
+    );
+  }
+
 
   return (
     <section className="py-10">
@@ -119,58 +103,66 @@ const StackSection = () => {
 
       {/* Kartu-kartu yang menampilkan alat */}
       <div className="flex flex-wrap justify-center gap-6">
-        {tools.map((tool, index) => (
+        {tools.map((page, index) => (
           <div
             key={index}
             id={`card-${index}`}
-            ref={cardRefs.current[index]} // Menghubungkan setiap kartu dengan ref terkait
+            ref={cardRefs[index]}
             className={`w-64 h-80 relative cursor-pointer hover:scale-105 ${
               visibleSections[`card-${index}`]
                 ? "translate-y-0 opacity-100"
                 : "translate-y-10 opacity-0"
             }`}
-            onClick={() => handleFlip(index)} // Fungsi untuk flip kartu
+            onClick={() => handleFlip(index)}
             style={{
-              transition: 'transform 500ms ease-out, opacity 300ms ease-out', // Durasi transisi
-              perspective: '1000px', // Perspektif untuk efek 3D
+              transition: 'transform 300ms ease-out, opacity 300ms ease-out',
+              perspective: '1000px',
             }}
           >
-            {/* Kartu yang terbalik */}
             <div
               className={`relative w-full h-full transition-transform duration-1000 transform`}
               style={{
-                transformStyle: 'preserve-3d', // Mempertahankan efek 3D
-                transform: flippedCards[index] ? 'rotateY(180deg)' : 'rotateY(0deg)', // Rotasi berdasarkan status flip
+                transformStyle: 'preserve-3d',
+                transform: flippedCards[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
               }}
             >
-              {/* Bagian Depan Kartu */}
+              {/* Bagian Depan */}
               <div
                 className="absolute w-full h-full backdrop-blur-sm p-6 rounded-3xl"
                 style={{
-                  backfaceVisibility: 'hidden', // Menyembunyikan bagian belakang kartu
+                  backfaceVisibility: 'hidden',
                 }}
               >
                 <div className="w-full h-full mx-auto my-auto bg-white bg-opacity-20 border border-white rounded-3xl shadow-md flex flex-col items-center justify-center">
-                  <img src={tool.image} alt={tool.name} className="w-auto h-20" />
-                  <h3 className="mt-4 text-lg font-bold">{tool.name}</h3>
+                  <img
+                    src={page?.properties?.logo?.files?.[0]?.file?.url || ''}
+                    alt={page?.properties?.Name?.title?.[0]?.plain_text || 'No Name'}
+                    className="w-auto h-20"
+                  />
+                  <h3 className="mt-4 text-lg font-bold">
+                    {page?.properties?.Name?.title?.[0]?.plain_text || 'Unnamed Tool'}
+                  </h3>
                 </div>
               </div>
 
-              {/* Bagian Belakang Kartu */}
+              {/* Bagian Belakang */}
               <div
                 className="absolute w-full h-full backdrop-blur-sm p-6 rounded-3xl"
                 style={{
-                  backfaceVisibility: 'hidden', // Menyembunyikan bagian depan saat terbalik
-                  transform: 'rotateY(180deg)', // Rotasi bagian belakang kartu
+                  backfaceVisibility: 'hidden',
+                  transform: 'rotateY(180deg)',
                 }}
               >
                 <div className="w-full h-full mx-auto my-auto bg-white bg-opacity-80 rounded-3xl shadow-md flex items-center justify-center">
-                  <p className="text-center text-base text-gray-800 px-4">{tool.description}</p>
+                  <p className="text-center text-base text-gray-800 px-4">
+                    {page?.properties?.short_desc?.rich_text?.[0]?.plain_text || 'Tidak ada deskripsi'}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         ))}
+
       </div>
     </section>
   );

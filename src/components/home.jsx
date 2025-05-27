@@ -90,7 +90,7 @@ const Home = ({ scrollToSection, skillRef, aboutMeRef, queriesRef }) => {
     <div 
       id="homeScroll"
       ref={homeScrollViewRef}
-      className={`grid h-screen w-[94%] mx-auto mt-10 transition-all duration-300 z-40 ${
+      className={`grid h-screen w-[94%] mx-auto mt-10 transition-all duration-300 z-40 will-change-[transform,opacity] ${
         visibleSections["homeScroll"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
       }`}
     >
@@ -100,11 +100,11 @@ const Home = ({ scrollToSection, skillRef, aboutMeRef, queriesRef }) => {
       </div>
 
       {/* Bagian Kiri, Tengah, Kanan */}
-      <div className="flex flex-col md:flex-row h-screen w-full mt-10 transition-all duration-500">
+      <div className="flex flex-col md:flex-row h-screen w-full mt-10 transition-all duration-500 will-change-[flex-basis,transform,opacity]">
         
         {/* Div Kiri - Tersembunyi di layar kecil */}
         <div
-          className="hidden md:flex flex-col justify-center items-start p-4 transition-all duration-500"
+          className="hidden md:flex flex-col justify-center items-start p-4 transition-all duration-500 will-change-[flex-basis,transform,opacity]"
           style={{ flexBasis: getFlexBasis('left'), maxWidth: '60%' }}
           onMouseEnter={() => setHovered('left')}
           onMouseLeave={() => setHovered(null)}
@@ -121,7 +121,7 @@ const Home = ({ scrollToSection, skillRef, aboutMeRef, queriesRef }) => {
 
               <p className="text-xl font-semibold mt-6 mb-1">Keahlian Saya:</p>
               <p className="text-lg mb-7">
-                Saya menguasai frontend, bahasa pemrograman C, PHP dan SQL.
+                Saya menguasai Fullstack Web Development, serta mampu bekerja dalam tim.
               </p>
               <button className="px-4 py-1 text-white font-semibold rounded-3xl border-2 border-white hover:shadow-[0_4px_10px_rgba(255,255,255,0.6)] bg-white/0 active:bg-white/30 transition-all duration-300" onClick={() => scrollToSection(skillRef)}>
                 Lebih banyak

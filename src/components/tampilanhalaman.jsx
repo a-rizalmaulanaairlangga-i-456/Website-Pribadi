@@ -86,7 +86,7 @@ const TampilanHalaman = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, s
               className={`
                 px-6 py-2 border-2 border-white text-black rounded-3xl text-lg font-medium bg-white
                 hover:bg-black hover:text-white active:shadow-[0_10px_15px_rgba(255,255,255,0.6)]
-                transition-all duration-700
+                transition-all duration-300
                 ${visibleSections["buttonMoreAll"]
                   ? "translate-y-0 opacity-100"
                   : "translate-y-10 opacity-0"

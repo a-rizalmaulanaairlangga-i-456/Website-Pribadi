@@ -29,7 +29,7 @@ function CardProject({ section }) {
                 visibleSections["achiev"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
               }`} // Animasi munculnya bagian akademik
             >
-              <h2 className="text-4xl font-bold pt-20 mb-10">Prestasi Akademik</h2>
+              <h2 className="text-4xl font-bold pt-20">Prestasi Akademik</h2>
               <AcademicAchiev /> {/* Memanggil komponen untuk daftar prestasi akademik */}
             </div>
           )}
@@ -39,11 +39,11 @@ function CardProject({ section }) {
             <div
               id="nonachiev" // ID untuk identifikasi bagian non-akademik
               ref={nonAchievRef} // Referensi untuk animasi
-              className={`transition-transform duration-300 ease-in-out ${
+              className={`transition-transform duration-300 ease-in-out mt-12 ${
                 visibleSections["nonachiev"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
               }`} // Animasi munculnya bagian non-akademik
             >
-              <h2 className="text-4xl font-bold pt-20 mb-10">Prestasi Non-Akademik</h2>
+              <h2 className="text-4xl font-bold pt-20">Prestasi Non-Akademik</h2>
               <AcademicNonAchiev /> {/* Memanggil komponen untuk daftar prestasi non-akademik */}
             </div>
           )}

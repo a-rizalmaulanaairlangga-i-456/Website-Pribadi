@@ -1,108 +1,343 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+// Modifikasi dari ProjectWebSection: Menampilkan webProject, webCollabProject, dan semua proyek lainnya dengan penanda proyek unggulan
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { AnimationContext } from "../App";
 
-// Data proyek yang ditampilkan
-const projects = [
-    {
-      id: 1,
-      title: "Simple E Commerce Website", // Judul proyek
-      description: "Project akhir semester membuat website E Commerce dengan fitur menambah produk ke dalam cart", // Deskripsi proyek
-      image: "e-commerceWeb.png", // Gambar untuk proyek
-      link: "https://rizalmaulanaairlangga-projekakhir-sem1.vercel.app/", // Link ke website
-    },
-    {
-      id: 2,
-      title: "Copy PENS Website", // Judul proyek
-      description: "Project evaluasi 2 membuat salinan halaman depan dari website PENS", // Deskripsi proyek
-      image: "copy-PENSWebsite.png", // Gambar untuk proyek
-      link: "https://rizalitpens.github.io/Evaluasi2-WDW-Sem1/", // Link ke website
-    },
-    // Tambahkan lebih banyak data projek di sini
-  ];
-
 function ProjectWebSection() {
-  // Menggunakan context untuk animasi bagian yang terlihat
   const { visibleSections, observeSections } = useContext(AnimationContext);
+  const [projects, setProjects] = useState([]);
+  const [collabProjects, setCollabProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [refs, setRefs] = useState([]);
 
-  // Menggunakan useRef untuk referensi elemen dalam proyek dan kontrol animasi
-  const moreRef = useRef(null); // Referensi untuk tombol 'Lihat Lebih Banyak'
-  const testRef = useRef(null); // Referensi untuk tombol 'Cara Menguji Program?'
-  const webRefs = useRef(projects.map(() => React.createRef())); // Referensi untuk setiap proyek
+  const moreRef = useRef(null);
+  const testRef = useRef(null);
 
-  // Efek untuk memonitor bagian-bagian yang terlihat saat scroll
+useEffect(() => {
+  async function fetchAllProjects() {
+    try {
+      // Sequential fetching (satu per satu)
+      const resWeb = await fetch("http://localhost:3001/api/dbWebProject");
+      const jsonWeb = await resWeb.json();
+      
+      const resCollab = await fetch("http://localhost:3001/api/dbCollabWebProject");
+      const jsonCollab = await resCollab.json();
+
+      // Proses data seperti sebelumnya
+      const sortByDate = (arr) =>
+        arr
+          .filter(p => p.properties && p.properties.Foto?.files?.length > 0)
+          .sort((a, b) => {
+            try {
+              const dateA = new Date(a.properties.Date?.date?.start);
+              const dateB = new Date(b.properties.Date?.date?.start);
+              return dateB - dateA;
+            } catch {
+              return 0;
+            }
+          });
+
+      setProjects(sortByDate(jsonWeb));
+      setCollabProjects(sortByDate(jsonCollab));
+    } catch (e) {
+      console.error("Fetch error:", e);
+    } finally {
+      setLoading(false);
+    }
+  }
+  
+  fetchAllProjects();
+}, []);
+
   useEffect(() => {
-    // observeSections digunakan untuk memonitor bagian-bagian yang perlu dianimasikan
-    observeSections([moreRef, testRef, ...webRefs.current], [0.2]); // Threshold 0.2 berarti animasi akan dimulai saat 20% elemen terlihat
-  }, [observeSections]);
+    const all = [...projects, ...collabProjects];
+    setRefs(all.map(() => React.createRef()));
+  }, [projects, collabProjects]);
+
+  useEffect(() => {
+    if (refs.length > 0) {
+      observeSections([moreRef, testRef, ...refs], Array(refs.length + 2).fill(0.2));
+    }
+  }, [refs, observeSections]);
+
+  const getImageUrl = (project) => {
+    if (!project.properties.Foto || !project.properties.Foto.files || project.properties.Foto.files.length === 0) {
+      return 'https://via.placeholder.com/800x600?text=No+Image';
+    }
+    return project.properties.Foto.files[0].file.url;
+  };
+
+  // Fungsi untuk mendapatkan judul
+  const getTitle = (project) =>
+    project.properties?.Name?.title?.[0]?.plain_text || 'Judul Tidak Tersedia';
+
+  const getDescription = (project) =>
+    project.properties?.Description?.rich_text?.[0]?.plain_text || 'Judul Tidak Tersedia';
+
+  // Fungsi untuk mendapatkan link
+  const getLinkWeb = (project) => {
+    if (!project.properties.LinkWeb || !project.properties.LinkWeb.url) {
+      return '#';
+    }
+    return project.properties.LinkWeb.url;
+  };
+
+  // Fungsi untuk mendapatkan link
+  const getLinkRepo = (project) => {
+    if (!project.properties.RepoLink || !project.properties.RepoLink.url) {
+      return '#';
+    }
+    return project.properties.RepoLink.url;
+  };
+
+  const isFeatured = (project) =>
+    project.properties?.Terbaik?.checkbox === true;
+
+  const ProjectCard = ({ project, index, prefix }) => (
+    <a
+      key={project.id}
+      href={getLinkWeb(project)}
+      target="_blank"
+      rel="noopener noreferrer"
+      id={`${prefix}-${project.id}`}
+      ref={refs[index]}
+      className={`group shadow-md hover:shadow-black overflow-hidden block cursor-pointer transition-all duration-300 rounded-3xl ${
+        visibleSections[`${prefix}-${project.id}`]
+          ? "translate-y-0 opacity-100"
+          : "translate-y-10 opacity-0"
+      }`}
+    >
+      <div className="relative overflow-hidden rounded-3xl">
+        <img
+          src={getImageUrl(project)}
+          alt={getTitle(project)}
+          className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+        {isFeatured(project) && (
+          <div className="absolute top-2 left-2 bg-yellow-400 text-black text-sm font-bold px-2 py-1 rounded-full shadow">
+            Unggulan
+          </div>
+        )}
+      </div>
+      <h2 className="text-3xl font-semibold mt-5">{getTitle(project)}</h2>
+    </a>
+  );
+
+  const AllProjects = ({ title, projects, prefix }) => (
+    <div className="w-full px-14 mt-10">
+      <h2 className="text-2xl font-bold">{title}</h2>
+      <div className="flex flex-wrap justify-center gap-6">
+        {projects.map((p, i) => (
+          <ProjectCard key={p.id} project={p} index={i} prefix={prefix} />
+        ))}
+      </div>
+    </div>
+  );
+
+  if (loading) return <p className="text-xl text-center">Loading proyek...</p>;
 
   return (
     <div className="text-center mb-10">
-      {/* Grid untuk menampilkan proyek */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-14 pt-10 px-14 w-full">
-        {/* Iterasi untuk setiap proyek dalam array 'projects' */}
-        {projects.map((project) => (
-          <a
-            key={project.id} // Key untuk setiap elemen
-            href={project.link} // Link ke website proyek
-            target="_blank" // Membuka link di tab baru
-            rel="noopener noreferrer" // Keamanan untuk link eksternal
-            id={`web-${project.id}`} // ID unik untuk tiap proyek
-            ref={webRefs.current[project.id - 1]} // Menambahkan referensi untuk animasi
-            className={`group shadow-md hover:shadow-black overflow-hidden block cursor-pointer transition-all duration-300 rounded-3xl ${
-              visibleSections[`web-${project.id}`]
-                ? "translate-y-0 opacity-100 duration-300 ease-in-out" // Animasi jika bagian proyek terlihat
-                : "translate-y-10 opacity-0 duration-300 ease-in" // Animasi jika bagian proyek tidak terlihat
-            }`}
-          >
-            {/* Menampilkan gambar proyek */}
-            <div className="relative overflow-hidden rounded-3xl">
-              <img
-                src={project.image} // Sumber gambar
-                alt={project.title} // Deskripsi gambar
-                className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-500" // Efek hover pada gambar
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                {/* Deskripsi proyek yang muncul saat hover */}
-                <p className="text-sm text-left text-gray-700 mt-1">{project.description}</p>
-              </div>
+      <div className="w-full px-14 mt-10">
+        {/* Web mandiri */}
+        <div className="w-full">
+          {/* Web mandiri terbaik */}
+          <div className="w-full">
+            <h2 className="text-2xl font-bold">Web Mandiri Terbaik</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-14 mt-4 px-14 w-full">
+              {projects.map((project, index) => (
+                <a
+                  key={project.id}
+                  href={getLinkWeb(project)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id={`web-${project.id}`}
+                  ref={refs[index]}
+                  className={`group shadow-md hover:shadow-black overflow-hidden block cursor-pointer transition-all duration-300 rounded-3xl ${
+                    visibleSections[`web-${project.id}`]
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-10 opacity-0"
+                  }`}
+                >
+                  {/* gambar dan efek hover */}
+                  <div className="relative overflow-hidden rounded-3xl">
+                    <img
+                      src={getImageUrl(project)}
+                      alt={getTitle(project)}
+                      className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      {/* Deskripsi proyek yang muncul saat hover */}
+                      <p className="text-sm text-left text-gray-700 mt-1">{getDescription(project)}. Klik untuk melihat detail</p>
+                    </div>
+                  </div>
+                  <h2 className="text-3xl font-semibold mt-5">{getTitle(project)}</h2>
+                </a>
+              ))}
             </div>
-            <h2 className="text-3xl font-semibold mt-5">{project.title}</h2> {/* Judul proyek */}
-          </a>
-        ))}
+          </div>
+          {/* Daftar Semua Proyek mandiri */}
+          <div>
+            <h2 className="text-2xl font-bold mb-4">Semua Proyek Mandiri</h2>
+            <div className="flex flex-wrap justify-center gap-6">
+              {projects.map((project, i) => (
+                <a
+                  key={project.id}
+                  href={getLinkRepo(project)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id={`web-${project.id}`}
+                  ref={refs[i]}
+                  className={`shadow-md overflow-hidden relative group w-[45%] md:w-[30%] lg:w-[22%] rounded-3xl
+                    transition-transform duration-300
+                    ${visibleSections[`web-${project.id}`]
+                      ? "translate-y-0 opacity-100 ease-in-out"
+                      : "translate-y-10 opacity-0 ease-in"
+                    }`}
+                >
+                  <div className="relative overflow-hidden rounded-3xl h-[12rem] md:h-[9rem] lg:h-[7rem]">
+                    <img
+                      src={getImageUrl(project)}
+                      alt={getTitle(project)}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/800x600?text=Image+Error';
+                      }}
+                    />
+                    {isFeatured(project) && (
+                      <div className="absolute top-2 left-2 bg-yellow-300 text-black text-sm font-semibold px-2 py-1 rounded-full shadow">
+                        Terbaik
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                    <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <p className="text-sm text-gray-600">Klik untuk melihat kode</p>
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-semibold mt-5">
+                    {getTitle(project)}
+                  </h3>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+
+
+        {/* Web kolaborasi */}
+        <div className="w-full mt-24">
+          {/* Web kolaborasi terbaik */}
+          <div className="w-full">
+            <h2 className="text-2xl font-bold">Web Kolaborasi Terbaik</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-14 mt-4 px-14 w-full">
+              {collabProjects.map((project, index) => (
+                <a
+                  key={project.id}
+                  href={getLinkWeb(project)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id={`collab-${project.id}`}
+                  ref={refs[index]}
+                  className={`group shadow-md hover:shadow-black overflow-hidden block cursor-pointer transition-all duration-300 rounded-3xl ${
+                    visibleSections[`collab-${project.id}`]
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-10 opacity-0"
+                  }`}
+                >
+                  {/* gambar dan efek hover */}
+                  <div className="relative overflow-hidden rounded-3xl">
+                    <img
+                      src={getImageUrl(project)}
+                      alt={getTitle(project)}
+                      className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      {/* Deskripsi proyek yang muncul saat hover */}
+                      <p className="text-sm text-left text-gray-700 mt-1">{getDescription(project)}. Klik untuk melihat detail</p>
+                    </div>
+                  </div>
+                  <h2 className="text-3xl font-semibold mt-5">{getTitle(project)}</h2>
+                </a>
+              ))}
+            </div>
+          </div>
+          {/* Daftar Semua Proyek kolaborasi */}
+          <div>
+            <h2 className="text-2xl font-bold mb-4">Semua Proyek Kolaborasi</h2>
+            <div className="flex flex-wrap justify-center gap-6">
+              {collabProjects.map((project, i) => (
+                <a
+                  key={project.id}
+                  href={getLinkRepo(project)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id={`collab-${project.id}`}
+                  ref={refs[i]}
+                  className={`shadow-md overflow-hidden relative group w-[45%] md:w-[30%] lg:w-[22%] rounded-3xl
+                    transition-transform duration-300
+                    ${visibleSections[`collab-${project.id}`]
+                      ? "translate-y-0 opacity-100 ease-in-out"
+                      : "translate-y-10 opacity-0 ease-in"
+                    }`}
+                >
+                  <div className="relative overflow-hidden rounded-3xl h-[12rem] md:h-[9rem] lg:h-[7rem]">
+                    <img
+                      src={getImageUrl(project)}
+                      alt={getTitle(project)}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/800x600?text=Image+Error';
+                      }}
+                    />
+                    {isFeatured(project) && (
+                      <div className="absolute top-2 left-2 bg-yellow-300 text-black text-sm font-semibold px-2 py-1 rounded-full shadow">
+                        Terbaik
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                    <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <p className="text-sm text-gray-600">Klik untuk melihat kode</p>
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-semibold mt-5">
+                    {getTitle(project)}
+                  </h3>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      {/* Tombol untuk melihat lebih banyak proyek */}
       <a
         href="https://github.com/orgs/Sem-1-Workshop-Desain-web/repositories"
-        rel="noreferrer"
+        ref={moreRef}
         target="_blank"
-        id="more" // ID tombol
-        ref={moreRef} // Menambahkan referensi untuk animasi
-        className={`px-6 py-2 mt-16 border-2 justify-center border-white rounded-3xl bg-black text-white text-center inline-block 
-          transition-colors duration-700 ease-in-out hover:bg-white hover:text-black active:bg-gray-300 
-          ${visibleSections["more"] ? "translate-y-0 opacity-100 transition-transform duration-500 ease-in-out" : "translate-y-10 opacity-0 transition-transform duration-300 ease-in"}`}
+        rel="noreferrer"
+        className={`px-6 py-2 mt-16 border-2 justify-center border-white rounded-3xl bg-black text-white text-center inline-block
+          transition-all duration-300 hover:bg-white hover:text-black
+          ${visibleSections["more"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
       >
         Lihat Lebih Banyak
       </a>
 
-      {/* Bagian untuk menunjukkan cara menguji program */}
       <p className="mt-1 text-sm text-white text-center">
         <a
-          href="https://penssby-my.sharepoint.com/:b:/g/personal/3124600033_msoffice_pens_ac_id/EVLUGP0b-r1Jok5tdHjpPDYBsCoZPBgk2Y92P9GSkrmj3Q?e=8oNxnm"
-          rel="noreferrer"
+          href="https://drive.google.com/file/d/1SYDLonyZ-w3sEXUVpBrOC1BO9BI8nMEK/view?usp=sharing"
+          ref={testRef}
           target="_blank"
-          id="test" // ID untuk tombol 'Cara Menguji Program?'
-          ref={testRef} // Menambahkan referensi untuk animasi
-          className={`relative inline-block text-white hover:after:scale-x-100 after:content-[''] after:block after:w-full after:h-[2px] after:bg-white after:scale-x-0 after:origin-left after:transition-transform after:duration-300 transition-transform duration-300 ease-in-out ${
-            visibleSections["test"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
+          rel="noreferrer"
+          className={`relative inline-block text-white hover:after:scale-x-100 after:block after:w-full after:h-[2px] after:bg-white after:scale-x-0 after:origin-left after:transition-transform after:duration-300
+            ${visibleSections["test"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
         >
           Cara Menguji Program?
         </a>
       </p>
     </div>
   );
-}  
+}
 
 export default ProjectWebSection;

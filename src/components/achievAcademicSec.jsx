@@ -1,96 +1,197 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
-import { AnimationContext } from "../App";
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { AnimationContext } from '../App';
 
-// Daftar pencapaian akademik dengan data berupa id, judul, gambar, dan tautan dokumen
-const achievements = [
-  {
-    id: 1,
-    title: "SEAOSM",
-    image: "SEAOSM.png",
-    link: "https://drive.google.com/file/d/17L1TlA7VPls22wSs1t2x0htkLe03m1Gy/view?usp=sharing",
-  },
-  {
-    id: 2,
-    title: "NLC",
-    image: "NLC.png",
-    link: "https://drive.google.com/file/d/1XX49M8FTMUoS4uz5BMgSZB8mP7c4kk4E/view?usp=sharing",
-  },
-  {
-    id: 3,
-    title: "NSO VOL.2",
-    image: "NSO.png",
-    link: "https://drive.google.com/file/d/11YyfVYP_4DOHedEKkn8XXMNchzHFnPek/view?usp=sharing",
-  },
-  {
-    id: 4,
-    title: "IYSHO",
-    image: "IYSHO.png",
-    link: "https://drive.google.com/file/d/1XvKe5r_BnMzXSvhqBaUrkKoJByl-coj1/view?usp=sharing",
-  },
-  {
-    id: 5,
-    title: "ISMO",
-    image: "ISMO.png",
-    link: "https://drive.google.com/file/d/1Uz-WhVppdDEvseywdPyhQrHbKQFtP_tP/view?usp=sharing",
-  },
-  {
-    id: 6,
-    title: "FOSPAN",
-    image: "FOSPAN.png",
-    link: "https://drive.google.com/file/d/1Bnt93RYJ_Cd7bbpnqlP_ZRfOUcH73MaE/view?usp=sharing",
-  },
-];
-
-function AchievAcademic() {
-  // Mengakses context untuk animasi pada bagian web
+const AcademicAchievements = () => {
   const { visibleSections, observeSections } = useContext(AnimationContext);
 
-  // Membuat referensi untuk setiap elemen pencapaian
-  const achievAcadRefs = useRef(achievements.map(() => React.createRef()));
+  const [achievements, setAchievements] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [refs, setRefs] = useState([]);
 
-  // Menginisialisasi observer untuk memantau elemen pencapaian
+  // Fetch data dari backend
   useEffect(() => {
-    observeSections([...achievAcadRefs.current], [0.2]); // Mengatur threshold untuk animasi
-  }, [observeSections]);
+    async function fetchAchievements() {
+      try {
+        const res = await fetch('http://localhost:3001/api/dbAcaAchiev');
+        const json = await res.json();
+
+        // Pastikan data yang diterima valid
+        if (!Array.isArray(json)) {
+          console.error('Data yang diterima bukan array:', json);
+          return;
+        }
+
+        // Sort berdasarkan tanggal (descending) dengan penanganan error
+        const sorted = json
+          .filter(ach => ach.properties && ach.properties.Date && ach.properties.Date.date)
+          .sort((a, b) => {
+            try {
+              const dateA = new Date(a.properties.Date.date.start);
+              const dateB = new Date(b.properties.Date.date.start);
+              return dateB - dateA;
+            } catch (e) {
+              console.error('Error parsing date:', e);
+              return 0;
+            }
+          });
+
+        setAchievements(sorted);
+      } catch (e) {
+        console.error('Fetch error:', e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchAchievements();
+  }, []);
+
+  // Setup dynamic refs
+  useEffect(() => {
+    setRefs(achievements.map(() => React.createRef()));
+  }, [achievements]);
+
+  // Observe after refs siap
+  useEffect(() => {
+    if (refs.length === achievements.length && refs.length > 0) {
+      observeSections(refs, Array(refs.length).fill(0.2));
+    }
+  }, [refs, observeSections, achievements.length]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-xl">Loading prestasi...</p>
+      </div>
+    );
+  }
+
+  if (achievements.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-xl">Tidak ada data prestasi yang ditemukan</p>
+      </div>
+    );
+  }
+
+  // Pisahkan daftar terbaik dan semua
+  const best = achievements.filter(ach => 
+    ach.properties.Terbaik && ach.properties.Terbaik.checkbox
+  );
+  const rest = achievements;
+
+  // Fungsi untuk mendapatkan URL gambar yang aman
+  const getImageUrl = (ach) => {
+    if (!ach.properties.Foto || !ach.properties.Foto.files || ach.properties.Foto.files.length === 0) {
+      return 'https://via.placeholder.com/300x200?text=No+Image';
+    }
+    return ach.properties.Foto.files[0].file.url;
+  };
+
+  // Fungsi untuk mendapatkan judul
+  const getTitle = (ach) => {
+    if (!ach.properties.Name || !ach.properties.Name.title || ach.properties.Name.title.length === 0) {
+      return 'Judul Tidak Tersedia';
+    }
+    return ach.properties.Name.title[0].plain_text;
+  };
+
+  // Fungsi untuk mendapatkan link (jika menggunakan File sebagai link)
+  const getLink = (ach) => {
+    if (!ach.properties.File || !ach.properties.File.files || ach.properties.File.files.length === 0) {
+      return '#';
+    }
+    return ach.properties.File.files[0].file.url;
+  };
 
   return (
-    <div className="w-[98%] mx-auto p-6 text-center">
-      {/* Container utama untuk menampilkan daftar pencapaian */}
-      <div className="flex flex-wrap justify-center gap-6">
-        {achievements.map((achievement) => (
-          <a
-            key={achievement.id}
-            href={achievement.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            id={`acadAchiev-${achievement.id}`}
-            ref={achievAcadRefs.current[achievement.id - 1]}
-            className={`shadow-md overflow-hidden relative group w-[45%] md:w-[30%] lg:w-[22%] grid items-center rounded-3xl transition-transform ${
-              visibleSections[`acadAchiev-${achievement.id}`]
-                ? "translate-y-0 opacity-100 duration-300 ease-in-out"
-                : "translate-y-10 opacity-0 duration-300 ease-in"
-            }`}
-          >
-            {/* Gambar pencapaian */}
-            <div className="w-full overflow-hidden relative rounded-3xl h-[12rem] md:h-[9rem] lg:h-[7rem]">
-              <img
-                src={achievement.image}
-                alt={achievement.title}
-                className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              {/* Overlay gradient saat hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <p className="text-sm text-gray-600 mt-1">Klik untuk lihat dokumen</p>
-              </div>
-            </div>
-            {/* Judul pencapaian */}
-            <h2 className="text-xl font-semibold mt-5">{achievement.title}</h2>
-          </a>
-        ))}
-      </div>
-    </div>
-  );
-}
+    <section className="w-[98%] mx-auto p-6 text-center">
+      {/* Daftar Prestasi Terbaik */}
+      {best.length > 0 && (
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Prestasi Terbaik</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-14 px-14 w-full">
+            {best.map((ach, i) => {
+              const idx = achievements.findIndex(x => x.id === ach.id);
+              return (
+                <a
+                  key={ach.id}
+                  href={getLink(ach)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id={`acad-${ach.id}`}
+                  ref={refs[idx]}
+                  className={`group shadow-md hover:shadow-black overflow-hidden block cursor-pointer transition-all duration-300 rounded-3xl
+                    ${visibleSections[`acad-${ach.id}`]
+                      ? "translate-y-0 opacity-100 ease-in-out"
+                      : "translate-y-10 opacity-0 ease-in"
+                    }`}
+                >
+                  <div className="relative overflow-hidden rounded-3xl h-64">
+                    <img
+                      src={getImageUrl(ach)}
+                      alt={getTitle(ach)}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/300x200?text=Image+Error';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                    <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <p className="text-sm text-gray-600">Klik untuk melihat detail</p>
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-semibold mt-5">
+                    {getTitle(ach)}
+                  </h3>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
-export default AchievAcademic;
+      {/* Daftar Semua Prestasi */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Semua Prestasi</h2>
+        <div className="flex flex-wrap justify-center gap-6">
+          {rest.map((ach, i) => (
+            <a
+              key={ach.id}
+              href={getLink(ach)}
+              target="_blank"
+              rel="noopener noreferrer"
+              id={`acad-${ach.id}`}
+              ref={refs[i]}
+              className={`shadow-md overflow-hidden relative group w-[45%] md:w-[30%] lg:w-[22%] rounded-3xl
+                transition-transform duration-300
+                ${visibleSections[`acad-${ach.id}`]
+                  ? "translate-y-0 opacity-100 ease-in-out"
+                  : "translate-y-10 opacity-0 ease-in"
+                }`}
+            >
+              <div className="relative overflow-hidden rounded-3xl h-[12rem] md:h-[9rem] lg:h-[7rem]">
+                <img
+                  src={getImageUrl(ach)}
+                  alt={getTitle(ach)}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/300x200?text=Image+Error';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <p className="text-sm text-gray-600">Klik untuk lihat detail</p>
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold mt-5">
+                {getTitle(ach)}
+              </h3>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AcademicAchievements;

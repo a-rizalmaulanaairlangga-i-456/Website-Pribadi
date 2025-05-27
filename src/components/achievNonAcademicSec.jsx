@@ -1,92 +1,197 @@
-// Import React and required hooks
-import React, { useState, useContext, useEffect, useRef } from "react";
-import { AnimationContext } from "../App";
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { AnimationContext } from '../App';
 
-// Data for non-academic achievements
-const achievements = [
-  {
-    id: 1,
-    title: "Mural",
-    image: "mural.png",
-    link: "https://drive.google.com/file/d/1K5_evDiyG0rmERRlRxVLfAw4gO4hx8Tm/view?usp=sharing",
-  },
-  {
-    id: 2,
-    title: "Photographer",
-    image: "inc1.jpg",
-    link: "https://drive.google.com/file/d/1WJa-9OzJdD9dFL3UUBUXLweEv4SdDgwH/view?usp=sharing",
-  },
-  {
-    id: 3,
-    title: "Wakil Pimpinan Redaksi",
-    image: "inc2.jpg",
-    link: "https://drive.google.com/file/d/1ZHGljmXCAVe1SiLV-lE0QsnMgo2nQU45/view?usp=sharing",
-  },
-  {
-    id: 4,
-    title: "Generus",
-    image: "generus.jpg",
-    link: "https://drive.google.com/file/d/1P0Wf4SFcYq-vuGtXjLekETXc-t1jnLSt/view?usp=sharing",
-  },
-  {
-    id: 5,
-    title: "Big Fair Surabaya",
-    image: "bigFair.png",
-    link: "https://drive.google.com/drive/folders/1hrDglMJ0w3M3B25uIVcTxynr5pbkn7ME?usp=sharing",
-  }
-];
-
-// Component for displaying non-academic achievements
-function AchievNonAcademic() {
-  // Use AnimationContext to handle animations
+const AchievNonAcademic = () => {
   const { visibleSections, observeSections } = useContext(AnimationContext);
 
-  // Create refs for each achievement to track visibility
-  const achievNonAcadRefs = useRef(achievements.map(() => React.createRef()));
+  const [achievements, setAchievements] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [refs, setRefs] = useState([]);
 
-  // Observe visibility of each achievement when component mounts
+  // Fetch data dari backend
   useEffect(() => {
-    observeSections([...achievNonAcadRefs.current], [0.2]); // Adjust threshold
-  }, [observeSections]);
+    async function fetchAchievements() {
+      try {
+        const res = await fetch('http://localhost:3001/api/dbNonAcaAchiev');
+        const json = await res.json();
+
+        // Pastikan data yang diterima valid
+        if (!Array.isArray(json)) {
+          console.error('Data yang diterima bukan array:', json);
+          return;
+        }
+
+        // Sort berdasarkan tanggal (descending) dengan penanganan error
+        const sorted = json
+          .filter(ach => ach.properties && ach.properties.Date && ach.properties.Date.date)
+          .sort((a, b) => {
+            try {
+              const dateA = new Date(a.properties.Date.date.start);
+              const dateB = new Date(b.properties.Date.date.start);
+              return dateB - dateA;
+            } catch (e) {
+              console.error('Error parsing date:', e);
+              return 0;
+            }
+          });
+
+        setAchievements(sorted);
+      } catch (e) {
+        console.error('Fetch error:', e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchAchievements();
+  }, []);
+
+  // Setup dynamic refs
+  useEffect(() => {
+    setRefs(achievements.map(() => React.createRef()));
+  }, [achievements]);
+
+  // Observe after refs siap
+  useEffect(() => {
+    if (refs.length === achievements.length && refs.length > 0) {
+      observeSections(refs, Array(refs.length).fill(0.2));
+    }
+  }, [refs, observeSections, achievements.length]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-xl">Loading prestasi non-akademik...</p>
+      </div>
+    );
+  }
+
+  if (achievements.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <p className="text-xl">Tidak ada data prestasi non-akademik yang ditemukan</p>
+      </div>
+    );
+  }
+
+  // Pisahkan daftar terbaik dan semua
+  const best = achievements.filter(ach => 
+    ach.properties.Terbaik && ach.properties.Terbaik.checkbox
+  );
+  const rest = achievements;
+
+  // Fungsi untuk mendapatkan URL gambar yang aman
+  const getImageUrl = (ach) => {
+    if (!ach.properties.Foto || !ach.properties.Foto.files || ach.properties.Foto.files.length === 0) {
+      return 'https://via.placeholder.com/300x200?text=No+Image';
+    }
+    return ach.properties.Foto.files[0].file.url;
+  };
+
+  // Fungsi untuk mendapatkan judul
+  const getTitle = (ach) => {
+    if (!ach.properties.Name || !ach.properties.Name.title || ach.properties.Name.title.length === 0) {
+      return 'Judul Tidak Tersedia';
+    }
+    return ach.properties.Name.title[0].plain_text;
+  };
+
+  // Fungsi untuk mendapatkan link (jika menggunakan File sebagai link)
+  const getLink = (ach) => {
+    if (!ach.properties.File || !ach.properties.File.files || ach.properties.File.files.length === 0) {
+      return '#';
+    }
+    return ach.properties.File.files[0].file.url;
+  };
 
   return (
-    <div className="w-[98%] mx-auto p-6 text-center">
-      {/* Container for achievements */}
-      <div className="flex flex-wrap justify-center gap-6">
-        {achievements.map((achievement) => (
-          <a
-            key={achievement.id} // Unique key for each achievement
-            href={achievement.link} // Link to the achievement document
-            target="_blank"
-            rel="noopener noreferrer"
-            id={`nonAcadAchiev-${achievement.id}`} // ID for animation tracking
-            ref={achievNonAcadRefs.current[achievement.id - 1]} // Ref for visibility tracking
-            className={`shadow-md overflow-hidden relative group w-[45%] md:w-[30%] lg:w-[22%] grid items-center rounded-3xl transition-transform ${
-              visibleSections[`nonAcadAchiev-${achievement.id}`]
-                ? "translate-y-0 opacity-100 duration-300 ease-in-out"
-                : "translate-y-10 opacity-0 duration-300 ease-in"
-            }`}
-          >
-            {/* Image section with hover effects */}
-            <div className="w-full overflow-hidden relative rounded-3xl h-[12rem] md:h-[9rem] lg:h-[7rem]">
-              <img
-                src={achievement.image} // Display achievement image
-                alt={achievement.title} // Alt text for the image
-                className="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <p className="text-sm text-gray-600 mt-1">Klik untuk lihat dokumen</p>
-              </div>
-            </div>
+    <section className="w-[98%] mx-auto p-6 text-center">
+      {/* Daftar Prestasi Terbaik */}
+      {best.length > 0 && (
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Prestasi Non-Akademik Terbaik</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-14 px-14 w-full">
+            {best.map((ach, i) => {
+              const idx = achievements.findIndex(x => x.id === ach.id);
+              return (
+                <a
+                  key={ach.id}
+                  href={getLink(ach)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id={`nonAcad-${ach.id}`}
+                  ref={refs[idx]}
+                  className={`group shadow-md hover:shadow-black overflow-hidden block cursor-pointer transition-all duration-300 rounded-3xl
+                    ${visibleSections[`nonAcad-${ach.id}`]
+                      ? "translate-y-0 opacity-100 ease-in-out"
+                      : "translate-y-10 opacity-0 ease-in"
+                    }`}
+                >
+                  <div className="relative overflow-hidden rounded-3xl h-64">
+                    <img
+                      src={getImageUrl(ach)}
+                      alt={getTitle(ach)}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/300x200?text=Image+Error';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                    <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <p className="text-sm text-gray-600">Klik untuk melihat detail</p>
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-semibold mt-5">
+                    {getTitle(ach)}
+                  </h3>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
-            {/* Achievement title */}
-            <h2 className="text-xl font-semibold mt-5">{achievement.title}</h2>
-          </a>
-        ))}
+      {/* Daftar Semua Prestasi */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Semua Prestasi Non-Akademik</h2>
+        <div className="flex flex-wrap justify-center gap-6">
+          {rest.map((ach, i) => (
+            <a
+              key={ach.id}
+              href={getLink(ach)}
+              target="_blank"
+              rel="noopener noreferrer"
+              id={`nonAcad-${ach.id}`}
+              ref={refs[i]}
+              className={`shadow-md overflow-hidden relative group w-[45%] md:w-[30%] lg:w-[22%] rounded-3xl
+                transition-transform duration-300
+                ${visibleSections[`nonAcad-${ach.id}`]
+                  ? "translate-y-0 opacity-100 ease-in-out"
+                  : "translate-y-10 opacity-0 ease-in"
+                }`}
+            >
+              <div className="relative overflow-hidden rounded-3xl h-[12rem] md:h-[9rem] lg:h-[7rem]">
+                <img
+                  src={getImageUrl(ach)}
+                  alt={getTitle(ach)}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/300x200?text=Image+Error';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <p className="text-sm text-gray-600">Klik untuk lihat detail</p>
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold mt-5">
+                {getTitle(ach)}
+              </h3>
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default AchievNonAcademic;

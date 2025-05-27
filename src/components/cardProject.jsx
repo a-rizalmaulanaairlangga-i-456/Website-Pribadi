@@ -33,7 +33,7 @@ function CardProject({ section }) {
             visibleSections["web"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <h2 className="text-4xl text-center font-bold pt-20 mb-10">Projek Website</h2>
+          <h2 className="text-4xl text-center font-bold pt-20">Projek Website</h2>
           <WebProjects />
         </div>
       )}
@@ -43,11 +43,11 @@ function CardProject({ section }) {
         <div
           id="logic" // ID untuk identifikasi elemen
           ref={logicRef} // Referensi untuk animasi
-          className={`transition-transform duration-300 ease-in-out ${
+          className={`transition-transform duration-300 ease-in-out mt-12 ${
             visibleSections["logic"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <h2 className="text-4xl text-center font-bold pt-20 mb-10">
+          <h2 className="text-4xl text-center font-bold pt-20">
             Projek Logika Pemrograman (dengan Bahasa Pemrograman C)
           </h2>
           <LogicProjects />

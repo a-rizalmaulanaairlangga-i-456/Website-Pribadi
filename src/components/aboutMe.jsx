@@ -58,13 +58,13 @@ const AboutMe = () => {
             </div>
 
           </div>
-          <div class="relative z-10 mt-10 flex gap-4 justify-center">
+          <div class="relative text-xl z-10 mt-10 flex gap-4 justify-center">
             {/* Tombol Lihat CV */}
             <a
               href="https://www.canva.com/design/DAGcDuXrLuA/OCfppTRVaHwFLhjgeNec-w/edit?utm_content=DAGcDuXrLuA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
               target="_blank"
               rel="noopener noreferrer"
-              class="w-[45%] h-12 bg-white/85 text-xl text-black backdrop-blur-sm font-semibold rounded-3xl hover:text-white active:bg-white/40 hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
+              class="w-[45%] h-12 bg-white/85 text-black backdrop-blur-sm font-semibold rounded-3xl hover:text-white active:bg-white/40 hover:bg-white/20 border-2 border-white transition-all duration-500 flex items-center justify-center"
             >
               lihat CV
             </a>
@@ -78,7 +78,7 @@ const AboutMe = () => {
                 transition-[transform,color,background-color] duration-500 ease-in-out 
                 transform scale-105 hover:scale-100"
             >
-              Akademik
+              Prestasi
             </HashLink>
           </div>
         </div>

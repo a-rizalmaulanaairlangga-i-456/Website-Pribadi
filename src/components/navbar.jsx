@@ -143,46 +143,42 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
         {/* Navigation Menu Section (Hidden on small screens) */}
         <div 
           className={`hidden md:flex items-center text-base transition-all duration-1000 ease-in-out ${
-            isScrolled ? 'relative justify-center' : 'relative justify-end'
+            isScrolled ? 'justify-center -mr-10' : 'justify-end'
           }`}
-          style={{
-            transform: isScrolled ? 'translateX(0)' : 'translateX(50px)',
-            width: '100%'
-          }}
         >
           <div
             className={`flex transition-all duration-500 ${
-              isScrolled ? 'bg-neutral-900 rounded-full w-fit px-7 py-2 -mb-3 gap-3' : 'py-1 mr-14'
+              isScrolled ? 'bg-neutral-900 rounded-full w-fit px-7 py-2 -mb-3 gap-3 transform translate-x-0' : 'py-1 mr-14 transform translate-x-[calc(50vw-80%)]'
             }`}
           >
             <button
               onClick={() => handleNavigation(aboutMeRef)}
-              className={`hover:bg-zinc-200 hover:text-black px-3 py-1 mr-1 rounded-2xl transition duration-500 ease-in-out ${
-                activeMenu === 'About Me' ? 'bg-zinc-400 text-black' : 'hover:bg-zinc-200'
+              className={`hover:bg-white/90 hover:text-black px-3 py-1 mr-1 rounded-2xl transition duration-500 ease-in-out ${
+                activeMenu === 'About Me' ? 'bg-white/75 text-black' : ''
               }`}
             >
               Tentang
             </button>
             <button
               onClick={() => handleNavigation(cardStackRef)}
-              className={`hover:bg-zinc-200 hover:text-black px-3 py-1 mr-1 rounded-2xl transition duration-500 ease-in-out ${
-                activeMenu === 'Stack' ? 'bg-zinc-400 text-black' : 'hover:bg-zinc-200'
+              className={`hover:bg-white/90 hover:text-black px-3 py-1 mr-1 rounded-2xl transition duration-500 ease-in-out ${
+                activeMenu === 'Stack' ? 'bg-white/75 text-black' : ''
               }`}
             >
               Alat
             </button>
             <button
               onClick={() => handleNavigation(skillRef)}
-              className={`hover:bg-zinc-200 hover:text-black px-3 py-1 mr-1 rounded-2xl transition duration-500 ease-in-out ${
-                activeMenu === 'Skill' ? 'bg-zinc-400 text-black' : 'hover:bg-zinc-200'
+              className={`hover:bg-white/90 hover:text-black px-3 py-1 mr-1 rounded-2xl transition duration-500 ease-in-out ${
+                activeMenu === 'Skill' ? 'bg-white/75 text-black' : ''
               }`}
             >
               Keahlian
             </button>
             <button
               onClick={() => handleNavigation(queriesRef)}
-              className={`hover:bg-zinc-200 hover:text-black px-3 py-1 rounded-2xl transition duration-500 ease-in-out ${
-                activeMenu === 'Queries' ? 'bg-zinc-400 text-black' : 'hover:bg-zinc-200'
+              className={`hover:bg-white/90 hover:text-black px-3 py-1 rounded-2xl transition duration-500 ease-in-out ${
+                activeMenu === 'Queries' ? 'bg-white/75 text-black' : ''
               }`}
             >
               Pertanyaan
@@ -192,8 +188,8 @@ const Navbar = ({ scrollToSection, homeRef, aboutMeRef, cardStackRef, skillRef, 
 
         {/* Contact Menu Section */}
         <div
-          className={`hidden md:block text-sm mr-4 transition-all duration-500 ease-in-out ${
-            isScrolled ? 'mr-0 translate-y-2' : ''
+          className={`hidden md:block text-sm transition-all duration-500 ease-in-out ${
+            isScrolled ? 'translate-y-2' : 'relative mr-6'
           }`}
         >
           <button
