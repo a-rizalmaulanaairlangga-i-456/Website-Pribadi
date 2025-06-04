@@ -77,7 +77,7 @@ const Skill = () => {
                 transition-[transform,color,background-color] duration-500 ease-in-out 
                 transform scale-105 hover:scale-100"
             >
-              Projek
+              Proyek
             </HashLink>
           </div>
         </div>

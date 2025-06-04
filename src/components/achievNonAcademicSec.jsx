@@ -12,7 +12,7 @@ const AchievNonAcademic = () => {
   useEffect(() => {
     async function fetchAchievements() {
       try {
-        const res = await fetch('http://localhost:3001/api/dbNonAcaAchiev');
+        const res = await fetch('https://personalwebsitebackend-production.up.railway.app/api/dbNonAcaAchiev');
         const json = await res.json();
 
         // Pastikan data yang diterima valid
@@ -107,7 +107,7 @@ const AchievNonAcademic = () => {
     <section className="w-[98%] mx-auto p-6 text-center">
       {/* Daftar Prestasi Terbaik */}
       {best.length > 0 && (
-        <div className="mb-12">
+        <div className="w-full">
           <h2 className="text-2xl font-bold mb-4">Prestasi Non-Akademik Terbaik</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-14 px-14 w-full">
             {best.map((ach, i) => {
@@ -152,7 +152,7 @@ const AchievNonAcademic = () => {
 
       {/* Daftar Semua Prestasi */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Semua Prestasi Non-Akademik</h2>
+        <h2 className="text-2xl font-bold mt-8 mb-4">Semua Prestasi Non-Akademik</h2>
         <div className="flex flex-wrap justify-center gap-6">
           {rest.map((ach, i) => (
             <a

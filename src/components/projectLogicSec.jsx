@@ -14,7 +14,7 @@ function ProjectLogicSection() {
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const res = await fetch('http://localhost:3001/api/dbLogicProject');
+        const res = await fetch('https://personalwebsitebackend-production.up.railway.app/api/dbLogicProject');
         const json = await res.json();
 
         // Pastikan data yang diterima valid
@@ -64,7 +64,7 @@ function ProjectLogicSection() {
   // Observe sections after refs are ready
   useEffect(() => {
     if (refs.length > 0) {
-      observeSections([moreLogicRef, testLogicRef, ...refs], Array(refs.length + 2).fill(0.2));
+      observeSections([moreLogicRef, testLogicRef, ...refs], Array(refs.length + 2).fill(0.1));
     }
   }, [refs, observeSections]);
 
@@ -118,11 +118,14 @@ function ProjectLogicSection() {
     <div className="w-[98%] mx-auto p-6 text-center">
       {/* Daftar Proyek Terbaik */}
       {bestProjects.length > 0 && (
-        <div className="mb-12">
+        <div className="w-full">
           <h2 className="text-2xl font-bold mb-4">Proyek Unggulan</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-14 px-14 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-14 px-14 w-full">
             {bestProjects.map((project, i) => {
               const idx = projects.findIndex(p => p.id === project.id);
+              const visibleBestLogic = visibleSections[`logic-${project.id}`];
+              const classBestLogic = `group shadow-md hover:shadow-black overflow-hidden block cursor-pointer transition-all duration-300 rounded-3xl
+                ${visibleBestLogic ? "translate-y-0 opacity-100 ease-in-out" : "translate-y-10 opacity-0 ease-in"}`;
               return (
                 <a
                   key={project.id}
@@ -130,20 +133,18 @@ function ProjectLogicSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   id={`logic-${project.id}`}
-                  ref={refs[idx]}
-                  className={`group shadow-md hover:shadow-black overflow-hidden block cursor-pointer transition-all duration-300 rounded-3xl
-                    ${visibleSections[`logic-${project.id}`]
-                      ? "translate-y-0 opacity-100 ease-in-out"
-                      : "translate-y-10 opacity-0 ease-in"
-                    }`}
+                  ref={idx !== -1 ? refs[idx] : null}
+                  className={classBestLogic}
                 >
                   <div className="relative overflow-hidden rounded-3xl h-64">
                     <img
                       src={getImageUrl(project)}
-                      alt={getTitle(project)}
+                      alt={getTitle(project) || "Gambar proyek"}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/800x600?text=Image+Error';
+                        if (!e.target.src.includes('placeholder.com')) {
+                          e.target.src = 'https://via.placeholder.com/800x600?text=Image+Error';
+                        }
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
@@ -163,42 +164,41 @@ function ProjectLogicSection() {
 
       {/* Daftar Semua Proyek */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Semua Proyek Logika</h2>
+        <h2 className="text-2xl font-bold mt-8 mb-4">Semua Proyek Logika</h2>
         <div className="flex flex-wrap justify-center gap-6">
-          {otherProjects.map((project, i) => (
-            <a
-              key={project.id}
-              href={getLink(project)}
-              target="_blank"
-              rel="noopener noreferrer"
-              id={`logic-${project.id}`}
-              ref={refs[i]}
-              className={`shadow-md overflow-hidden relative group w-[45%] md:w-[30%] lg:w-[22%] rounded-3xl
-                transition-transform duration-300
-                ${visibleSections[`logic-${project.id}`]
-                  ? "translate-y-0 opacity-100 ease-in-out"
-                  : "translate-y-10 opacity-0 ease-in"
-                }`}
-            >
-              <div className="relative overflow-hidden rounded-3xl h-[12rem] md:h-[9rem] lg:h-[7rem]">
-                <img
-                  src={getImageUrl(project)}
-                  alt={getTitle(project)}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/800x600?text=Image+Error';
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
-                <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <p className="text-sm text-gray-600">Klik untuk melihat kode</p>
+          {otherProjects.map((project, i) => {
+            const visibleAllLogic = visibleSections[`logic-${project.id}`];
+            const classAllLogic = `shadow-md overflow-hidden relative group w-[45%] md:w-[30%] lg:w-[22%] rounded-3xl transition-transform duration-300
+            ${visibleAllLogic ? "translate-y-0 opacity-100 ease-in-out" : "translate-y-10 opacity-0 ease-in"}`;
+            return (
+              <a
+                key={project.id}
+                href={getLink(project)}
+                target="_blank"
+                rel="noopener noreferrer"
+                id={`logic-${project.id}`}
+                ref={refs[i] ?? null}
+                className={classAllLogic}
+              >
+                <div className="relative overflow-hidden rounded-3xl h-32 md:h-28 lg:h-20 xl:h-28">
+                  <img
+                    src={getImageUrl(project)}
+                    alt={getTitle(project)}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    onError={(e) => {
+                      e.target.src = 'https://via.placeholder.com/800x600?text=Image+Error';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                  <div className="absolute bottom-0 left-0 w-full p-4 bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <p className="text-sm text-gray-600">Klik untuk melihat kode</p>
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-xl font-semibold mt-5">
-                {getTitle(project)}
-              </h3>
-            </a>
-          ))}
+                <h3 className="text-xl font-semibold mt-5">
+                  {getTitle(project)}
+                </h3>
+              </a>
+            )})}
         </div>
       </div>
 

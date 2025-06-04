@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { AnimationContext } from "../App";
 import WebProjects from './projectWebSec.jsx';
 import LogicProjects from './projectLogicSec.jsx';
@@ -33,7 +33,7 @@ function CardProject({ section }) {
             visibleSections["web"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <h2 className="text-4xl text-center font-bold pt-20">Projek Website</h2>
+          <h2 className="text-4xl text-center font-bold pt-20">Proyek Website</h2>
           <WebProjects />
         </div>
       )}
@@ -48,7 +48,7 @@ function CardProject({ section }) {
           }`}
         >
           <h2 className="text-4xl text-center font-bold pt-20">
-            Projek Logika Pemrograman (dengan Bahasa Pemrograman C)
+            Proyek Logika Pemrograman (dengan Bahasa Pemrograman C)
           </h2>
           <LogicProjects />
         </div>

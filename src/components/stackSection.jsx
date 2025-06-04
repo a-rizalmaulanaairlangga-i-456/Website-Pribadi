@@ -18,7 +18,7 @@ const StackSection = () => {
   useEffect(() => {
     async function fetchTools() {
       try {
-        const response = await fetch('http://localhost:3001/api/dbTools');
+        const response = await fetch('https://personalwebsitebackend-production.up.railway.app/api/dbTools');
         const json = await response.json();
 
         const sorted = json.sort((a, b) => {
