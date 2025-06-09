@@ -16,10 +16,10 @@ function ProjectWebSection() {
     async function fetchAllProjects() {
       try {
         // Sequential fetching (satu per satu)
-        const resWeb = await fetch("https://personalwebsitebackend-production.up.railway.app/api/dbWebProject");
+        const resWeb = await fetch("https://personal-website-backend-vercel.vercel.app/api/db_web_project");
         const jsonWeb = await resWeb.json();
         
-        const resCollab = await fetch("https://personalwebsitebackend-production.up.railway.app/api/dbCollabWebProject");
+        const resCollab = await fetch("https://personal-website-backend-vercel.vercel.app/api/db_collab_web_project");
         const jsonCollab = await resCollab.json();
 
         // Proses data seperti sebelumnya

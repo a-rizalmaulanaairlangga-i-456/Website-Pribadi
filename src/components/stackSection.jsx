@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import Card from './card'; // Mengimpor komponen Card
 import { AnimationContext } from "../App"; // Mengimpor konteks animasi dari App.js
 
 const StackSection = () => {
@@ -18,7 +17,7 @@ const StackSection = () => {
   useEffect(() => {
     async function fetchTools() {
       try {
-        const response = await fetch('https://personalwebsitebackend-production.up.railway.app/api/dbTools');
+        const response = await fetch('https://personal-website-backend-vercel.vercel.app/api/db_tools');
         const json = await response.json();
 
         const sorted = json.sort((a, b) => {

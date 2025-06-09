@@ -12,7 +12,7 @@ const AchievNonAcademic = () => {
   useEffect(() => {
     async function fetchAchievements() {
       try {
-        const res = await fetch('https://personalwebsitebackend-production.up.railway.app/api/dbNonAcaAchiev');
+        const res = await fetch('https://personal-website-backend-vercel.vercel.app/api/db_nonaca_achiev');
         const json = await res.json();
 
         // Pastikan data yang diterima valid

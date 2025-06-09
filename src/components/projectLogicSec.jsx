@@ -14,7 +14,7 @@ function ProjectLogicSection() {
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const res = await fetch('https://personalwebsitebackend-production.up.railway.app/api/dbLogicProject');
+        const res = await fetch('https://personal-website-backend-vercel.vercel.app/api/db_logic_project');
         const json = await res.json();
 
         // Pastikan data yang diterima valid

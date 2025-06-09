@@ -12,15 +12,31 @@ const AcademicAchievements = () => {
   useEffect(() => {
     async function fetchAchievements() {
       try {
-        const res = await fetch('https://personalwebsitebackend-production.up.railway.app/api/dbAcaAchiev');
+        const res = await fetch('https://personal-website-backend-vercel.vercel.app/api/db_aca_achiev');
         const json = await res.json();
-        if (!Array.isArray(json)) return;
 
+        // Pastikan data yang diterima valid
+        if (!Array.isArray(json)) {
+          console.error('Data yang diterima bukan array:', json);
+          return;
+        }
+
+        // Sort berdasarkan tanggal (descending) dengan penanganan error
         const sorted = json
-          .filter(ach => ach.properties?.Date?.date?.start)
-          .sort((a, b) => new Date(b.properties.Date.date.start) - new Date(a.properties.Date.date.start));
+          .filter(ach => ach.properties && ach.properties.Date && ach.properties.Date.date)
+          .sort((a, b) => {
+            try {
+              const dateA = new Date(a.properties.Date.date.start);
+              const dateB = new Date(b.properties.Date.date.start);
+              return dateB - dateA;
+            } catch (e) {
+              console.error('Error parsing date:', e);
+              return 0;
+            }
+          });
 
         setAchievements(sorted);
+
       } catch {
         console.error('Fetch error');
       } finally {
