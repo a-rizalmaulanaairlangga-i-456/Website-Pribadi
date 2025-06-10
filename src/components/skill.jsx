@@ -52,7 +52,7 @@ const Skill = () => {
           <div class="relative w-[90%] mx-auto">
             <div class="relative z-10">
               <h2 class="text-2xl font-semibold text-white">
-                Saya menguasai Fullstack Web Development, dibuktikan lewat proyek seperti website portofolio ini. Saya menggunakan JSX untuk frontend, JavaScript untuk backend, serta Notion sebagai database. Selain itu, saya juga menguasai bahasa C untuk memperkuat logika pemrograman.
+                Saya menguasai Fullstack Web Development, dibuktikan lewat proyek seperti website portofolio ini. Saya menggunakan JSX untuk frontend, JavaScript dan PHP untuk backend, serta Notion dan MySQLI sebagai database. Selain itu, saya juga menguasai bahasa C untuk memperkuat logika pemrograman.
               </h2>
             </div>
           </div>
