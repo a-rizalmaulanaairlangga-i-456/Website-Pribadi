@@ -97,10 +97,10 @@ const AchievNonAcademic = () => {
 
   // Fungsi untuk mendapatkan link (jika menggunakan File sebagai link)
   const getLink = (ach) => {
-    if (!ach.properties.File || !ach.properties.File.files || ach.properties.File.files.length === 0) {
+    if (!ach.properties.Files || !ach.properties.Files.files || ach.properties.Files.files.length === 0) {
       return '#';
     }
-    return ach.properties.File.files[0].file.url;
+    return ach.properties.Files.files[0].file.url;
   };
 
   return (
